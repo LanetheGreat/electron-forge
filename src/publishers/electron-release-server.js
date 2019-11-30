@@ -6,7 +6,7 @@ import path from 'path';
 
 import asyncOra from '../util/ora-handler';
 
-const d = debug('electron-forge:publish:ers');
+const d = debug('@lanethegreat/electron-forge:publish:ers');
 
 const ersPlatform = (platform, arch) => {
   switch (platform) {

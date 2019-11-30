@@ -3,7 +3,7 @@ import { yarnOrNpmSpawn, hasYarn } from './yarn-or-npm';
 
 import config from './config';
 
-const d = debug('electron-forge:dependency-installer');
+const d = debug('@lanethegreat/electron-forge:dependency-installer');
 
 export default async (dir, deps, areDev = false, exact = false) => {
   d('installing', JSON.stringify(deps), 'in:', dir, `dev=${areDev},exact=${exact},withYarn=${hasYarn()}`);

@@ -9,7 +9,7 @@ import asyncOra from '../util/ora-handler';
 import installDepList from '../util/install-dependencies';
 import ora from '../util/ora';
 
-const d = debug('electron-forge:init:custom');
+const d = debug('@lanethegreat/electron-forge:init:custom');
 
 export default async (dir, template, lintStyle) => {
   let templateModulePath;

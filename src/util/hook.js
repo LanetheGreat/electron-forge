@@ -1,6 +1,6 @@
 import debug from 'debug';
 
-const d = debug('electron-forge:hook');
+const d = debug('@lanethegreat/electron-forge:hook');
 
 export default async (forgeConfig, hookName, ...hookArgs) => {
   const hooks = forgeConfig.hooks || {};

@@ -19,7 +19,7 @@ import requireSearch from '../util/require-search';
 import resolveDir from '../util/resolve-dir';
 import getCurrentOutDir from '../util/out-dir';
 
-const d = debug('electron-forge:packager');
+const d = debug('@lanethegreat/electron-forge:packager');
 
 /**
  * @typedef {Object} PackageOptions
@@ -103,7 +103,7 @@ export default async (providedOptions = {}) => {
         prepareCounter += 1;
         prepareSpinner = ora(`Preparing to Package Application for arch: ${(prepareCounter === 2 ? 'armv7l' : 'x64').cyan}`).start();
       }
-      await fs.remove(path.resolve(buildPath, 'node_modules/electron-compile/test'));
+      await fs.remove(path.resolve(buildPath, 'node_modules/@lanethegreat/electron-compile/test'));
       const bins = await pify(glob)(path.join(buildPath, '**/.bin/**/*'));
       for (const bin of bins) {
         await fs.remove(bin);
@@ -155,7 +155,7 @@ export default async (providedOptions = {}) => {
     throw new Error('electronPackagerConfig.all is not supported by Electron Forge.');
   }
   if (typeof packageOpts.asar === 'object' && packageOpts.asar.unpack) {
-    throw new Error('electron-compile does not support asar.unpack yet.  Please use asar.unpackDir');
+    throw new Error('@lanethegreat/electron-compile does not support asar.unpack yet.  Please use asar.unpackDir');
   }
 
   if (!packageJSON.version && !packageOpts.appVersion) {

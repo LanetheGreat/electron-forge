@@ -14,7 +14,7 @@ import readPackageJSON from '../util/read-package-json';
 import confirmIfInteractive from '../util/confirm-if-interactive';
 import { yarnOrNpmSpawn, hasYarn } from '../util/yarn-or-npm';
 
-const d = debug('electron-forge:import');
+const d = debug('@lanethegreat/electron-forge:import');
 
 /**
  * @typedef {Object} ImportOptions
@@ -27,7 +27,7 @@ const d = debug('electron-forge:import');
 /**
  * Attempt to import a given module directory to the Electron Forge standard.
  *
- * - Replaces the prebuilt electron package with the one that integrates with `electron-compile`
+ * - Replaces the prebuilt electron package with the one that integrates with `@lanethegreat/electron-compile`
  * - Sets up `git` and the correct NPM dependencies
  * - Adds a template forge config to `package.json`
  *
@@ -143,7 +143,7 @@ export default async (providedOptions = {}) => {
   if (electronName) {
     const electronPackageJSON = await readPackageJSON(path.resolve(dir, 'node_modules', electronName));
     electronVersion = electronPackageJSON.version;
-    packageJSON.devDependencies['electron-prebuilt-compile'] = electronVersion;
+    packageJSON.devDependencies['@lanethegreat/electron-prebuilt-compile'] = electronVersion;
   }
 
   await writeChanges();
@@ -175,7 +175,7 @@ export default async (providedOptions = {}) => {
 
     d('installing exactDevDependencies');
     await installDepList(dir, exactDevDeps.map((dep) => {
-      if (dep === 'electron-prebuilt-compile') {
+      if (dep === '@lanethegreat/electron-prebuilt-compile') {
         return `${dep}@${electronVersion || 'latest'}`;
       }
 
@@ -230,7 +230,7 @@ export default async (providedOptions = {}) => {
   info(interactive, `
 
 We have ATTEMPTED to convert your app to be in a format that electron-forge understands.
-Nothing much will have changed but we added the ${'"electron-prebuilt-compile"'.cyan} dependency.  This is \
+Nothing much will have changed but we added the ${'"@lanethegreat/electron-prebuilt-compile"'.cyan} dependency.  This is \
 the dependency you must version bump to get newer versions of Electron.
 
 

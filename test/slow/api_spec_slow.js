@@ -57,9 +57,18 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
 
       it('should have installed the initial node_modules', async () => {
         expectProjectPathExists('node_modules', 'folder');
-        expect(await fs.pathExists(path.resolve(dir, 'node_modules/electron-prebuilt-compile')), 'electron-prebuilt-compile should exist').to.equal(true);
-        expect(await fs.pathExists(path.resolve(dir, 'node_modules/babel-core')), 'babel-core should exist').to.equal(true);
-        expect(await fs.pathExists(path.resolve(dir, 'node_modules/electron-forge')), 'electron-forge should exist').to.equal(true);
+        expect(await fs.pathExists(
+          path.resolve(dir, 'node_modules/@lanethegreat/electron-prebuilt-compile')),
+          '@lanethegreat/electron-prebuilt-compile should exist'
+        ).to.equal(true);
+        expect(
+          await fs.pathExists(path.resolve(dir, 'node_modules/babel-core')),
+          'babel-core should exist'
+        ).to.equal(true);
+        expect(
+          await fs.pathExists(path.resolve(dir, 'node_modules/@lanethegreat/electron-forge')),
+          '@lanethegreat/electron-forge should exist'
+        ).to.equal(true);
       });
 
       it('should have set the .compilerc electron version to be a string', async () => {
@@ -284,7 +293,7 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
       let packageJSON = await readPackageJSON(dir);
       packageJSON.config.forge.electronPackagerConfig.asar = { unpack: 'somedir/**' };
       await fs.writeJson(path.join(dir, 'package.json'), packageJSON);
-      await expect(forge.package({ dir })).to.eventually.be.rejectedWith(/electron-compile does not support asar\.unpack/);
+      await expect(forge.package({ dir })).to.eventually.be.rejectedWith(/@lanethegreat\/electron-compile does not support asar\.unpack/);
       packageJSON = await readPackageJSON(dir);
       delete packageJSON.config.forge.electronPackagerConfig.asar;
       await fs.writeJson(path.join(dir, 'package.json'), packageJSON);

@@ -1,7 +1,7 @@
 import debug from 'debug';
 import path from 'path';
 
-const d = debug('electron-forge:require-search');
+const d = debug('@lanethegreat/electron-forge:require-search');
 
 export function requireSearchRaw(relativeTo, paths) {
   const testPaths = paths

@@ -18,7 +18,7 @@ import linuxDebInstaller from '../installers/linux/deb';
 import linuxRPMInstaller from '../installers/linux/rpm';
 import win32ExeInstaller from '../installers/win32/exe';
 
-const d = debug('electron-forge:install');
+const d = debug('@lanethegreat/electron-forge:install');
 
 const GITHUB_API = 'https://api.github.com';
 

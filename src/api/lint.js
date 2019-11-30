@@ -5,7 +5,7 @@ import { yarnOrNpmSpawn } from '../util/yarn-or-npm';
 import asyncOra from '../util/ora-handler';
 import resolveDir from '../util/resolve-dir';
 
-const d = debug('electron-forge:lint');
+const d = debug('@lanethegreat/electron-forge:lint');
 
 /**
  * @typedef {Object} LintOptions

@@ -5,7 +5,7 @@ import s3 from 's3';
 
 import asyncOra from '../util/ora-handler';
 
-const d = debug('electron-forge:publish:s3');
+const d = debug('@lanethegreat/electron-forge:publish:s3');
 
 AWS.util.update(AWS.S3.prototype, {
   addExpect100Continue: function addExpect100Continue() {

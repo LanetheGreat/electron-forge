@@ -1,7 +1,7 @@
 import spawnPromise from 'cross-spawn-promise';
 import debug from 'debug';
 
-const d = debug('electron-forge:hdiutil');
+const d = debug('@lanethegreat/electron-forge:hdiutil');
 
 export const getMountedImages = async () => {
   const output = await spawnPromise('hdiutil', ['info']);

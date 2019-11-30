@@ -9,7 +9,7 @@ import initStarter from '../init/init-starter-files';
 
 import asyncOra from '../util/ora-handler';
 
-const d = debug('electron-forge:init');
+const d = debug('@lanethegreat/electron-forge:init');
 
 /**
  * @typedef {Object} InitOptions

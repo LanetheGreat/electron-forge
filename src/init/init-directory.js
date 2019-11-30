@@ -5,7 +5,7 @@ import logSymbols from 'log-symbols';
 import asyncOra from '../util/ora-handler';
 import confirmIfInteractive from '../util/confirm-if-interactive';
 
-const d = debug('electron-forge:init:directory');
+const d = debug('@lanethegreat/electron-forge:init:directory');
 
 export default async (dir, interactive) => {
   await asyncOra('Initializing Project Directory', async (initSpinner) => {

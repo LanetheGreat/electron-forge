@@ -4,7 +4,7 @@ import semver from 'semver';
 
 import { hasYarn, yarnOrNpmSpawn } from './yarn-or-npm';
 
-const d = debug('electron-forge:check-system');
+const d = debug('@lanethegreat/electron-forge:check-system');
 
 async function checkGitExists() {
   return new Promise((resolve) => {

@@ -6,7 +6,7 @@ import readPackageJSON from './read-package-json';
 
 export default async(originalDir, buildPath, electronVersion, pPlatform, pArch, done) => {
   await asyncOra('Compiling Application', async () => {
-    const compileCLI = require(path.resolve(originalDir, 'node_modules/electron-compile/lib/cli.js'));
+    const compileCLI = require(path.resolve(originalDir, 'node_modules/@lanethegreat/electron-compile/lib/cli.js'));
 
     async function compileAndShim(appDir) {
       for (const entry of await fs.readdir(appDir)) {
@@ -29,7 +29,7 @@ export default async(originalDir, buildPath, electronVersion, pPlatform, pArch, 
       packageJSON.main = 'es6-shim.js';
 
       await fs.writeFile(path.join(appDir, 'es6-shim.js'),
-        await fs.readFile(path.join(path.resolve(originalDir, 'node_modules/electron-compile/lib/es6-shim.js')), 'utf8'));
+        await fs.readFile(path.join(path.resolve(originalDir, 'node_modules/@lanethegreat/electron-compile/lib/es6-shim.js')), 'utf8'));
 
       await fs.writeJson(path.join(appDir, 'package.json'), packageJSON, { spaces: 2 });
     }

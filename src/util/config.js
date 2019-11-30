@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import os from 'os';
 import path from 'path';
 
-const d = debug('electron-forge:runtime-config');
+const d = debug('@lanethegreat/electron-forge:runtime-config');
 
 /*
  * Let's be real: sharing config across spawned processes must be easier than

@@ -3,7 +3,7 @@ import { yarnOrNpmSpawn } from '../util/yarn-or-npm';
 
 import asyncOra from '../util/ora-handler';
 
-const d = debug('electron-forge:init:standard-fix');
+const d = debug('@lanethegreat/electron-forge:init:standard-fix');
 
 const run = async (dir) => {
   try {

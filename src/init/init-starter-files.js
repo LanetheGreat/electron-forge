@@ -4,7 +4,7 @@ import path from 'path';
 
 import asyncOra from '../util/ora-handler';
 
-const d = debug('electron-forge:init:starter-files');
+const d = debug('@lanethegreat/electron-forge:init:starter-files');
 
 export const copy = async (source, target) => {
   d(`copying "${source}" --> "${target}"`);

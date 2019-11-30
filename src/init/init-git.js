@@ -5,7 +5,7 @@ import path from 'path';
 
 import asyncOra from '../util/ora-handler';
 
-const d = debug('electron-forge:init:git');
+const d = debug('@lanethegreat/electron-forge:init:git');
 
 export default async (dir) => {
   await asyncOra('Initializing Git Repository', async () => {

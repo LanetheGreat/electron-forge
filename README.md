@@ -1,11 +1,11 @@
 Electron Forge
 --------------
-[![Linux/macOS Build Status](https://travis-ci.org/electron-userland/electron-forge.svg?branch=5.x)](https://travis-ci.org/electron-userland/electron-forge)
+[![Linux/macOS Build Status](https://travis-ci.com/LanetheGreat/electron-forge.svg?branch=5.x-update-packages)](https://travis-ci.com/LanetheGreat/electron-forge)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/79ae80nek1eucyy3/branch/5.x?svg=true)](https://ci.appveyor.com/project/electron-userland/electron-forge)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![npm version](https://badge.fury.io/js/electron-forge.svg)](https://www.npmjs.com/package/electron-forge)
-[![npm](https://img.shields.io/npm/dt/electron-forge.svg?maxAge=2592000)](https://www.npmjs.com/package/electron-forge)
-[![license](https://img.shields.io/github/license/electron-userland/electron-forge.svg)](https://github.com/electron-userland/electron-forge/blob/5.x/LICENSE)
+[![npm version](https://img.shields.io/github/package-json/v/LanetheGreat/electron-forge/5.x-update-packages?label=version)](https://www.npmjs.com/package/@lanethegreat/electron-forge)
+[![npm](https://img.shields.io/npm/dt/@lanethegreat/electron-forge.svg?maxAge=2592000)](https://www.npmjs.com/package/@lanethegreat/electron-forge)
+[![license](https://img.shields.io/github/license/LanetheGreat/electron-forge.svg)](https://github.com/LanetheGreat/electron-forge/blob/5.x/LICENSE)
 ![status](https://img.shields.io/badge/Status-%20Ready%20for%20Awesome-red.svg)
 
 A complete tool for building modern Electron applications.
@@ -20,16 +20,16 @@ jump right in to Electron development.
 [Goals](#project-goals) |
 [Usage](#usage) |
 [Configuration](#config) |
-[Support](https://github.com/electron-userland/electron-forge/blob/master/SUPPORT.md) |
-[Contributing](https://github.com/electron-userland/electron-forge/blob/master/CONTRIBUTING.md) |
-[Changelog](https://github.com/electron-userland/electron-forge/blob/master/CHANGELOG.md)
+[Support](https://github.com/LanetheGreat/electron-forge/blob/master/SUPPORT.md) |
+[Contributing](https://github.com/LanetheGreat/electron-forge/blob/master/CONTRIBUTING.md) |
+[Changelog](https://github.com/LanetheGreat/electron-forge/blob/master/CHANGELOG.md)
 
 # Getting Started
 
 **Note**: Electron Forge requires Node 6 or above, plus git installed.
 
 ```bash
-npm install -g electron-forge
+npm install -g @lanethegreat/electron-forge
 electron-forge init my-new-app
 cd my-new-app
 npm start
@@ -62,7 +62,7 @@ npm start
 
 With these goals in mind, under the hood this project uses, among others:
 
-* [`electron-compile`](https://github.com/electron/electron-compile): a tool
+* [`@lanethegreat/electron-compile`](https://github.com/LanetheGreat/electron-compile): a tool
   that lets you use modern and futuristic languages inside Electron without
   worrying about transpiling or build tooling.
 * [`electron-rebuild`](https://github.com/electron/electron-rebuild):
@@ -76,7 +76,7 @@ With these goals in mind, under the hood this project uses, among others:
 ## Starting a new Project
 
 ```bash
-npm install -g electron-forge
+npm install -g @lanethegreat/electron-forge
 electron-forge init my-new-project
 ```
 
@@ -198,7 +198,7 @@ You can set `electronPackagerConfig` with any of the options from
 * `arch` (use the `--arch` Forge command line argument instead, so it's available to all of Forge)
 * `asar.unpack` (use `asar.unpackDir` instead)
 * `dir` (use the `cwd` Forge command line argument instead, so it's available to all of Forge)
-* `electronVersion` (uses the exact version specified for `electron-prebuilt-compile` in your `devDependencies`)
+* `electronVersion` (uses the exact version specified for `@lanethegreat/electron-prebuilt-compile` in your `devDependencies`)
 * `out`
 * `platform` (use the `--platform` Forge command line argument instead, so it's available to all of Forge)
 * `quiet`
@@ -206,7 +206,7 @@ You can set `electronPackagerConfig` with any of the options from
 You can set `electronRebuildConfig` with any of the options from
 [Electron Rebuild](https://github.com/electron/electron-rebuild#how-can-i-integrate-this-into-grunt--gulp--whatever), except:
 
-* `electronVersion`/`--version` (uses the exact version specified for `electron-prebuilt-compile` in your `devDependencies`)
+* `electronVersion`/`--version` (uses the exact version specified for `@lanethegreat/electron-prebuilt-compile` in your `devDependencies`)
 * `arch`/`--arch` (use the `--arch` Forge command line argument instead, so it's available to all of Forge)
 * `buildPath`/`--module-dir` (uses your project's `node_modules`)
 

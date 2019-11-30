@@ -3,12 +3,12 @@ import debug from 'debug';
 import logSymbols from 'log-symbols';
 import realOra from 'ora';
 
-const d = debug('electron-forge:lifecycle');
+const d = debug('@lanethegreat/electron-forge:lifecycle');
 
-const useFakeOra = (process.env.DEBUG && process.env.DEBUG.includes('electron-forge'));
+const useFakeOra = (process.env.DEBUG && process.env.DEBUG.includes('@lanethegreat/electron-forge'));
 
 if (useFakeOra) {
-  console.warn('WARNING: DEBUG environment variable detected.  Progress indicators will be sent over electron-forge:lifecycle'.red);
+  console.warn('WARNING: DEBUG environment variable detected.  Progress indicators will be sent over @lanethegreat/electron-forge:lifecycle'.red);
 }
 
 export const fakeOra = (name) => {

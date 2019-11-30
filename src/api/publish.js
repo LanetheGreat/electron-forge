@@ -13,7 +13,7 @@ import getCurrentOutDir from '../util/out-dir';
 
 import make from './make';
 
-const d = debug('electron-forge:publish');
+const d = debug('@lanethegreat/electron-forge:publish');
 
 /**
  * @typedef {Object} PublishOptions
