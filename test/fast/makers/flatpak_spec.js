@@ -27,7 +27,7 @@ describe('flatpak maker', () => {
       'fs-extra': { readdir: stub().returns(Promise.resolve([])) },
       './config-fn': config => config,
       '../../util/ensure-output': { ensureDirectory: ensureDirectoryStub },
-      'electron-installer-flatpak': eidStub,
+      '@malept/electron-installer-flatpak': eidStub,
     });
     flatpakMaker = flatpakModule.default;
   });

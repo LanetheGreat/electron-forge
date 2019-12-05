@@ -15,7 +15,7 @@ feature. Known modules include:
 * `electron-download`
 * `electron-installer-debian`
 * `electron-installer-dmg`
-* `electron-installer-flatpak`
+* `@malept/electron-installer-flatpak`
 * `electron-installer-redhat`
 * `electron-installer-snap:*`
 * `electron-osx-sign`

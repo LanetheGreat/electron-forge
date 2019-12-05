@@ -89,7 +89,7 @@ export default async (providedOptions = {}) => {
     'electron-download': 'already uses this module as a transitive dependency',
     'electron-installer-debian': 'already uses this module as a transitive dependency',
     'electron-installer-dmg': 'already uses this module as a transitive dependency',
-    'electron-installer-flatpak': 'already uses this module as a transitive dependency',
+    '@malept/electron-installer-flatpak': 'already uses this module as a transitive dependency',
     'electron-installer-redhat': 'already uses this module as a transitive dependency',
     'electron-osx-sign': 'already uses this module as a transitive dependency',
     'electron-packager': 'already uses this module as a transitive dependency',

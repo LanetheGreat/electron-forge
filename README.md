@@ -186,7 +186,7 @@ config object:
 | `dmg`       | Darwin              | Generates a DMG file | [`electronInstallerDMG`](https://github.com/mongodb-js/electron-installer-dmg#api) | No |  |
 | `deb`       | Linux               | Generates a Debian package | [`electronInstallerDebian`](https://github.com/unindented/electron-installer-debian#options) | Yes | [`fakeroot` and `dpkg`](https://github.com/unindented/electron-installer-debian#requirements) |
 | `rpm`       | Linux               | Generates an RPM package | [`electronInstallerRedhat`](https://github.com/unindented/electron-installer-redhat#options) | Yes | [`rpm`](https://github.com/unindented/electron-installer-redhatn#requirements) |
-| `flatpak`   | Linux               | Generates a [Flatpak](http://flatpak.org/) file | [`electronInstallerFlatpak`](https://github.com/endlessm/electron-installer-flatpak#options) | No | [`flatpak-builder`](https://github.com/endlessm/electron-installer-flatpak#requirements) |
+| `flatpak`   | Linux               | Generates a [Flatpak](http://flatpak.org/) file | [`electronInstallerFlatpak`](https://github.com/malept/electron-installer-flatpak#options) | No | [`flatpak-builder`](https://github.com/malept/electron-installer-flatpak#requirements) |
 | `snap`      | Linux               | Generates a [Snap](https://snapcraft.io/) file | [`electronInstallerSnap`](https://github.com/electron-userland/electron-installer-snap/blob/master/docs/api.md#options) | No | [`snapcraft`](https://snapcraft.io/docs/build-snaps/#install-snapcraft) |
 
 ## Configuring `package`

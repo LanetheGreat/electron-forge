@@ -6,7 +6,7 @@ import { ensureDirectory } from '../../util/ensure-output';
 import isInstalled from '../../util/is-installed';
 import { linuxConfig, populateConfig } from '../../util/linux-config';
 
-export const isSupportedOnCurrentPlatform = async () => isInstalled('electron-installer-flatpak');
+export const isSupportedOnCurrentPlatform = async () => isInstalled('@malept/electron-installer-flatpak');
 
 export function flatpakArch(nodeArch) {
   switch (nodeArch) {
@@ -19,7 +19,7 @@ export function flatpakArch(nodeArch) {
 }
 
 export default async ({ dir, targetArch, forgeConfig }) => {
-  const installer = require('electron-installer-flatpak');
+  const installer = require('@malept/electron-installer-flatpak');
 
   const arch = flatpakArch(targetArch);
   const config = populateConfig({ forgeConfig, configKey: 'electronInstallerFlatpak', targetArch });
@@ -30,7 +30,7 @@ export default async ({ dir, targetArch, forgeConfig }) => {
     config,
     pkgArch: arch,
     dir,
-    // electron-installer-flatpak uses a filename scheme with default config options that we don't
+    // @malept/electron-installer-flatpak uses a filename scheme with default config options that we don't
     // have access to, so we need to detect the flatpak filename after it's created.
     outPath: path.join(outDir, 'dummy.flatpak'),
   });
