@@ -1,4 +1,12 @@
 src
 test
+.cz.js
+.editorconfig
+.esdoc.json
+.eslintignore
+.eslintrc
+.appveyor.yml
 .travis.yml
 ci
+/.project
+/.settings
