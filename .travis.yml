@@ -1,5 +1,7 @@
 addons:
   apt:
+    sources:
+      - sourceline: 'ppa:alexlarsson/flatpak'
     packages:
       - flatpak
       - flatpak-builder
