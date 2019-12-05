@@ -26,7 +26,7 @@ jump right in to Electron development.
 
 # Getting Started
 
-**Note**: Electron Forge requires Node 6 or above, plus git installed.
+**Note**: Electron Forge requires Node 8 or above, plus git installed.
 
 ```bash
 npm install -g @lanethegreat/electron-forge

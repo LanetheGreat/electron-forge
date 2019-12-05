@@ -22,7 +22,7 @@ const windowsSdkPath = process.arch === 'x64' ?
 function findSdkTool(exe) {
   let sdkTool = path.join(windowsSdkPath, exe);
   if (!fs.existsSync(sdkTool)) {
-    sdkTool = resolveCommand(exe, true);
+    sdkTool = resolveCommand({ command: exe, options: { cwd: null } }, true);
   }
 
   if (!fs.existsSync(sdkTool)) {

@@ -4,7 +4,8 @@ import fs from 'fs-extra';
 import os from 'os';
 import path from 'path';
 
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 import proxyquire from 'proxyquire';
 
 import { createDefaultCertificate } from '../../src/makers/win32/appx';
@@ -17,6 +18,7 @@ const nodeInstaller = nodeInstallerArg.substr(12);
 const forge = proxyquire.noCallThru().load('../../src/api', {
   './install': async () => {},
 });
+chai.use(chaiAsPromised);
 
 describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
   let dir;
@@ -102,9 +104,7 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
 
   describe('init (with custom templater)', () => {
     beforeInitTest({ template: 'dummy' }, () => {
-      execSync('npm link', {
-        cwd: path.resolve(__dirname, '../fixture/custom_init'),
-      });
+      execSync(`npm link ${path.resolve(__dirname, '../fixture/custom_init')}`);
     });
 
     it('should create dot files correctly', async () => {
@@ -121,9 +121,13 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
     });
 
     after(async () => {
+      const customPath = path.resolve(__dirname, '../fixture/custom_init');
+      const dummyJSON = await readPackageJSON(customPath);
+
       await fs.remove(dir);
+      execSync(`npm unlink ${dummyJSON.name}`);
       execSync('npm unlink', {
-        cwd: path.resolve(__dirname, '../fixture/custom_init'),
+        cwd: customPath,
       });
     });
   });
