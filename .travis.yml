@@ -2,6 +2,7 @@ addons:
   apt:
     sources:
       - sourceline: 'ppa:alexlarsson/flatpak'
+    update: true
     packages:
       - flatpak
       - flatpak-builder
