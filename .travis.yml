@@ -1,11 +1,3 @@
-addons:
-  apt:
-    sources:
-      - sourceline: 'ppa:alexlarsson/flatpak'
-    update: true
-    packages:
-      - flatpak
-      - flatpak-builder
 language: node_js
 node_js:
 - 8
@@ -14,10 +6,9 @@ os:
 - osx
 dist: xenial
 osx_image: xcode8.3
-sudo: required
 services:
 - docker
-env:
+jobs:
   matrix:
   - NODE_INSTALLER=npm
   - NODE_INSTALLER=yarn
