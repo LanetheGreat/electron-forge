@@ -1,6 +1,5 @@
 import fs from 'fs-extra';
 import path from 'path';
-import pify from 'pify';
 
 import { ensureDirectory } from '../../util/ensure-output';
 import isInstalled from '../../util/is-installed';
@@ -35,7 +34,7 @@ export default async ({ dir, targetArch, forgeConfig }) => {
     outPath: path.join(outDir, 'dummy.flatpak'),
   });
 
-  await pify(installer)(flatpakConfig);
+  await installer(flatpakConfig);
 
   return (await fs.readdir(outDir))
     .filter(basename => basename.endsWith('.flatpak'))
