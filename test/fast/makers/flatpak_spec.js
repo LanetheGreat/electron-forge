@@ -20,7 +20,7 @@ describe('flatpak maker', () => {
 
   beforeEach(() => {
     ensureDirectoryStub = stub().returns(Promise.resolve());
-    eidStub = stub().callsArg(1);
+    eidStub = stub().resolves();
     forgeConfig = { electronInstallerFlatpak: {} };
 
     flatpakModule = proxyquire.noPreserveCache().noCallThru().load('../../../src/makers/linux/flatpak', {
