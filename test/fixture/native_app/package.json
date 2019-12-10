@@ -22,6 +22,6 @@
     "@newrelic/native-metrics": "2.1.1"
   },
   "optionalDependencies": {
-    "zipfile": "0.5.11"
+    "zipfile": "^0.5.11"
   }
 }
