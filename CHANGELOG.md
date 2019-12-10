@@ -1,3 +1,13 @@
+#### [5.3.1](https://github.com/LanetheGreat/electron-forge/releases/tag/v5.3.1) (2019-12-10)
+
+##### Bug Fixes
+
+* **maker:**  replaced electron-installer-flatpak with a more up-to-date fork. ([0255c73c](https://github.com/LanetheGreat/electron-forge/commit/0255c73c))
+
+##### Refactors
+
+* **generic:**  updated packages that don't require heavier code refactoring due to API changes. ([b09dd67a](https://github.com/LanetheGreat/electron-forge/commit/b09dd67a))
+
 #### [5.2.4](https://github.com/electron-userland/electron-forge/releases/tag/v5.2.4) (2019-01-15)
 
 ##### Chores
