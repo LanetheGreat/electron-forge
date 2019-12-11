@@ -46,7 +46,7 @@ tab.on('electron-forge', (data, done) => {
       null,
       program.commands
         .filter((cmd) => cmd._name.startsWith(data.lastPartial))
-        .map((cmd) => `${cmd._name}:${cmd._description}`).sort()
+        .map((cmd) => `${cmd._name}:${cmd._description}`).sort(),
     );
   } else {
     done(null, []);

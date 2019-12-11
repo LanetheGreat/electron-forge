@@ -103,7 +103,7 @@ describe('start', () => {
     resolveStub.returns(null);
 
     await expect(start()).to.eventually.be.rejectedWith(
-      'Failed to locate startable Electron application'
+      'Failed to locate startable Electron application',
     );
   });
 
@@ -117,7 +117,7 @@ describe('start', () => {
       dir: __dirname,
       interactive: false,
     })).to.eventually.be.rejectedWith(
-      `Please set your application's 'version' in '${__dirname}/package.json'.`
+      `Please set your application's 'version' in '${__dirname}/package.json'.`,
     );
   });
 

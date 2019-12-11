@@ -47,7 +47,7 @@ function warnIfPackageManagerIsntAKnownGoodVersion(packageManager, version, whit
   if (!validPackageManagerVersion(packageManager, versionString, versions, ora)) {
     ora.warn(
       `You are using ${packageManager}, but not a known good version.\n` +
-      `The known versions that work with Electron Forge are: ${versions}`
+      `The known versions that work with Electron Forge are: ${versions}`,
     );
   }
 }

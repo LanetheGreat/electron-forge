@@ -67,7 +67,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
           d(`Upload Progress (${path.basename(artifactPath)}) ${Math.round((uploader.progressAmount / uploader.progressTotal) * 100)}%`);
         });
         uploader.on('end', () => done());
-      })
+      }),
     ));
   });
 };

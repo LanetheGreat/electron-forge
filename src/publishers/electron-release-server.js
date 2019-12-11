@@ -119,7 +119,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) =
         } catch (err) {
           reject(err);
         }
-      })
+      }),
     ));
   });
 };

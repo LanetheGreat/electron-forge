@@ -67,7 +67,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
           name: path.basename(artifactPath),
         });
         return done();
-      })
+      }),
     ));
   });
 };

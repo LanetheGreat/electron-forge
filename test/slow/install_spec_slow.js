@@ -52,7 +52,7 @@ describe('install', () => {
       throws: new Error('it broke'),
     });
     await expect(install({ repo: 'a/b', interactive: false })).to.eventually.be.rejectedWith(
-      'Failed to find releases for repository "a/b".  Please check the name and try again.'
+      'Failed to find releases for repository "a/b".  Please check the name and try again.',
     );
   });
 
@@ -61,7 +61,7 @@ describe('install', () => {
       message: 'Not Found',
     });
     await expect(install({ repo: 'b/c', interactive: false })).to.eventually.be.rejectedWith(
-      'Failed to find releases for repository "b/c".  Please check the name and try again.'
+      'Failed to find releases for repository "b/c".  Please check the name and try again.',
     );
   });
 
@@ -70,7 +70,7 @@ describe('install', () => {
       lolz: 'this aint no array',
     });
     await expect(install({ repo: 'c/d', interactive: false })).to.eventually.be.rejectedWith(
-      'Failed to find releases for repository "c/d".  Please check the name and try again.'
+      'Failed to find releases for repository "c/d".  Please check the name and try again.',
     );
   });
 
@@ -82,7 +82,7 @@ describe('install', () => {
       { tag_name: '0.1.0' },
     ]);
     await expect(install({ repo: 'e/f', interactive: false })).to.eventually.be.rejectedWith(
-      'Could not find any assets for the latest release'
+      'Could not find any assets for the latest release',
     );
   });
 
@@ -98,7 +98,7 @@ describe('install', () => {
       },
     ]);
     await expect(install({ repo: 'f/g', interactive: false })).to.eventually.be.rejectedWith(
-      `Failed to find any installable assets for target platform: ${`${process.platform}`.cyan}`
+      `Failed to find any installable assets for target platform: ${`${process.platform}`.cyan}`,
     );
   });
 
@@ -140,7 +140,7 @@ describe('install', () => {
       },
     ]);
     await expect(install({ repo: 'h/i', interactive: false })).to.eventually.be.rejectedWith(
-      'expected a chooseAsset function to be provided but it was not'
+      'expected a chooseAsset function to be provided but it was not',
     );
   });
 

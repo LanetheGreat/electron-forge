@@ -64,15 +64,15 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
         expectProjectPathExists('node_modules', 'folder');
         expect(await fs.pathExists(
           path.resolve(dir, 'node_modules/@lanethegreat/electron-prebuilt-compile')),
-          '@lanethegreat/electron-prebuilt-compile should exist'
+          '@lanethegreat/electron-prebuilt-compile should exist',
         ).to.equal(true);
         expect(
           await fs.pathExists(path.resolve(dir, 'node_modules/@babel/core')),
-          '@babel/core should exist'
+          '@babel/core should exist',
         ).to.equal(true);
         expect(
           await fs.pathExists(path.resolve(dir, 'node_modules/@lanethegreat/electron-forge')),
-          '@lanethegreat/electron-forge should exist'
+          '@lanethegreat/electron-forge should exist',
         ).to.equal(true);
       });
 
@@ -252,11 +252,11 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
       if (process.platform === 'win32') {
         await fs.copy(
           path.join(__dirname, '..', 'fixture', 'bogus-private-key.pvk'),
-          path.join(dir, 'default.pvk')
+          path.join(dir, 'default.pvk'),
         );
         packageJSON.config.forge.windowsStoreConfig.devCert = await createDefaultCertificate(
           'CN=Test Author',
-          { certFilePath: dir }
+          { certFilePath: dir },
         );
       }
       packageJSON.homepage = 'http://www.example.com/';
@@ -329,7 +329,7 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
       it('should have deleted the forge config from the packaged app', async () => {
         const cleanPackageJSON = JSON.parse(asar.extractFile(
           path.resolve(dir, 'out', `Test App-${process.platform}-${process.arch}`, resourcesPath, 'app.asar'),
-          'package.json'
+          'package.json',
         ));
         expect(cleanPackageJSON).to.not.have.nested.property('config.forge');
       });

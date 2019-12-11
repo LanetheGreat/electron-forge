@@ -5,7 +5,7 @@ export default class GitHub {
   constructor(authToken, requireAuth, options = {}) {
     this.options = merge(
       options,
-      { headers: { 'user-agent': 'Electron Forge' } }
+      { headers: { 'user-agent': 'Electron Forge' } },
     );
     if (authToken) {
       this.token = authToken;

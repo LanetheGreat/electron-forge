@@ -208,7 +208,7 @@ describe('publish', () => {
         const win32Index = darwinIndex === 0 ? 1 : 0;
         const darwinArgs = publisher.getCall(darwinIndex).args[0];
         expect(darwinArgs.artifacts.sort()).to.deep.equal(
-          fakeMake('darwin').reduce((accum, val) => accum.concat(val.artifacts), []).sort()
+          fakeMake('darwin').reduce((accum, val) => accum.concat(val.artifacts), []).sort(),
         );
         expect(darwinArgs.packageJSON).to.deep.equal({ state: 1 });
         expect(darwinArgs.authToken).to.equal(undefined);
@@ -217,7 +217,7 @@ describe('publish', () => {
         expect(darwinArgs.arch).to.equal('x64');
         const win32Args = publisher.getCall(win32Index).args[0];
         expect(win32Args.artifacts.sort()).to.deep.equal(
-          fakeMake('win32').reduce((accum, val) => accum.concat(val.artifacts), []).sort()
+          fakeMake('win32').reduce((accum, val) => accum.concat(val.artifacts), []).sort(),
         );
         expect(win32Args.packageJSON).to.deep.equal({ state: 0 });
         expect(win32Args.authToken).to.equal(undefined);
