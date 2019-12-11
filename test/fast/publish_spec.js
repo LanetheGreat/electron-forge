@@ -23,7 +23,7 @@ describe('publish', () => {
 
     publish = proxyquire.noCallThru().load('../../src/api/publish', {
       './make': async (...args) => makeStub(...args),
-      '../util/resolve-dir': async dir => resolveStub(dir),
+      '../util/resolve-dir': async (dir) => resolveStub(dir),
       '../util/read-package-json': () => Promise.resolve(require('../fixture/dummy_app/package.json')),
       '../util/forge-config': () => require('../../src/util/forge-config').default(path.resolve(__dirname, '../fixture/dummy_app')),
       '../util/require-search': requireSearchStub,

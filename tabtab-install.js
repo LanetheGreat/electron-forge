@@ -11,7 +11,7 @@ try {
 
   if (installer[shell]) {
     installer.handle(options.name, options)
-      .catch(e => console.warn(`Failed to install tab completion: ${e}`));
+      .catch((e) => console.warn(`Failed to install tab completion: ${e}`));
   } else {
     console.warn(`User shell ${shell} not supported, skipping completion install`);
   }

@@ -7,7 +7,7 @@ import moveApp from '../../util/move-app';
 
 export default async (filePath, installSpinner) => {
   const mounts = await getMountedImages();
-  let targetMount = mounts.find(mount => mount.imagePath === filePath);
+  let targetMount = mounts.find((mount) => mount.imagePath === filePath);
 
   if (!targetMount) {
     targetMount = await mountImage(filePath);
@@ -15,7 +15,7 @@ export default async (filePath, installSpinner) => {
 
   try {
     const volumePath = path.resolve('/Volumes', targetMount.mountPath);
-    const appName = (await fs.readdir(volumePath)).find(file => file.endsWith('.app'));
+    const appName = (await fs.readdir(volumePath)).find((file) => file.endsWith('.app'));
     if (!appName) {
       throw 'Failed to find .app file in DMG';
     }

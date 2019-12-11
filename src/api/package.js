@@ -35,7 +35,7 @@ const d = debug('@lanethegreat/electron-forge:packager');
  */
 function resolveHooks(hooks, dir) {
   if (hooks) {
-    return hooks.map(hook => (typeof hook === 'string' ? requireSearch(dir, [hook]) : hook));
+    return hooks.map((hook) => (typeof hook === 'string' ? requireSearch(dir, [hook]) : hook));
   }
 
   return [];

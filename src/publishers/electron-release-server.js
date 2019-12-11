@@ -29,7 +29,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) =
 
   d('attempting to authenticate to ERS');
 
-  const api = apiPath => `${ersConfig.baseUrl}/${apiPath}`;
+  const api = (apiPath) => `${ersConfig.baseUrl}/${apiPath}`;
 
   const { token } = await (await fetch(api('api/auth/login'), {
     method: 'POST',
@@ -55,7 +55,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) =
     );
 
   const versions = await (await authFetch('api/version')).json();
-  const existingVersion = versions.find(version => version.name === packageJSON.version);
+  const existingVersion = versions.find((version) => version.name === packageJSON.version);
 
   let channel = 'stable';
   if (ersConfig.channel) {
@@ -88,10 +88,10 @@ export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) =
       uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line no-param-reassign
     };
 
-    await Promise.all(artifacts.map(artifactPath =>
+    await Promise.all(artifacts.map((artifactPath) =>
       new Promise(async (resolve, reject) => {
         if (existingVersion) {
-          const existingAsset = existingVersion.assets.find(asset => asset.name === path.basename(artifactPath));
+          const existingAsset = existingVersion.assets.find((asset) => asset.name === path.basename(artifactPath));
           if (existingAsset) {
             d('asset at path:', artifactPath, 'already exists on server');
             uploaded += 1;

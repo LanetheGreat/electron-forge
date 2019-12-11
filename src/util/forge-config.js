@@ -4,7 +4,7 @@ import _template from 'lodash.template';
 import readPackageJSON from './read-package-json';
 import yarnOrNpm from './yarn-or-npm';
 
-const underscoreCase = str => str.replace(/(.)([A-Z][a-z]+)/g, '$1_$2').replace(/([a-z0-9])([A-Z])/g, '$1_$2').toUpperCase();
+const underscoreCase = (str) => str.replace(/(.)([A-Z][a-z]+)/g, '$1_$2').replace(/([a-z0-9])([A-Z])/g, '$1_$2').toUpperCase();
 
 const proxify = (object, envPrefix) => {
   const newObject = {};

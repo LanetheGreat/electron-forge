@@ -25,7 +25,7 @@ describe('dmg maker', () => {
     forgeConfig = { electronInstallerDMG: {} };
 
     dmgMaker = proxyquire.noPreserveCache().noCallThru().load('../../../src/makers/darwin/dmg', {
-      '../../util/config-fn': config => config,
+      '../../util/config-fn': (config) => config,
       '../../util/ensure-output': { ensureFile: ensureFileStub },
       'electron-installer-dmg': eidStub,
       'fs-extra': {

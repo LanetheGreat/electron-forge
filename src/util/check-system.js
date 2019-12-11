@@ -67,5 +67,5 @@ async function checkPackageManagerVersion(ora) {
 
 export default async function (ora) {
   return (await Promise.all([checkGitExists(ora), checkNodeVersion(ora), checkPackageManagerVersion(ora)]))
-    .every(check => check);
+    .every((check) => check);
 }

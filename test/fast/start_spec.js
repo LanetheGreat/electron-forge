@@ -19,7 +19,7 @@ describe('start', () => {
 
     start = proxyquire.noCallThru().load('../../src/api/start', {
       '../util/forge-config': async () => ({}),
-      '../util/resolve-dir': async dir => resolveStub(dir),
+      '../util/resolve-dir': async (dir) => resolveStub(dir),
       '../util/read-package-json': () => Promise.resolve(packageJSON),
       '../util/rebuild': () => Promise.resolve(),
       child_process: {

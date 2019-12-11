@@ -37,6 +37,6 @@ export default async ({ dir, targetArch, forgeConfig }) => {
   await installer(flatpakConfig);
 
   return (await fs.readdir(outDir))
-    .filter(basename => basename.endsWith('.flatpak'))
-    .map(basename => path.join(outDir, basename));
+    .filter((basename) => basename.endsWith('.flatpak'))
+    .map((basename) => path.join(outDir, basename));
 };

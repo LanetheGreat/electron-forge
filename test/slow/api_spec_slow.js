@@ -13,7 +13,7 @@ import installDeps from '../../src/util/install-dependencies';
 import readPackageJSON from '../../src/util/read-package-json';
 import yarnOrNpm from '../../src/util/yarn-or-npm';
 
-const nodeInstallerArg = process.argv.find(arg => arg.startsWith('--installer=')) || `--installer=${yarnOrNpm()}`;
+const nodeInstallerArg = process.argv.find((arg) => arg.startsWith('--installer=')) || `--installer=${yarnOrNpm()}`;
 const nodeInstaller = nodeInstallerArg.substr(12);
 const forge = proxyquire.noCallThru().load('../../src/api', {
   './install': async () => {},
@@ -340,13 +340,13 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
       });
 
       function getMakers(platform) {
-        return fs.readdirSync(path.resolve(__dirname, `../../src/makers/${platform}`)).map(file => path.parse(file).name);
+        return fs.readdirSync(path.resolve(__dirname, `../../src/makers/${platform}`)).map((file) => path.parse(file).name);
       }
 
       const goodMakers = [...getMakers(process.platform), ...getMakers('generic')];
-      const badPlatforms = ['darwin', 'linux', 'win32'].filter(p => p !== process.platform);
+      const badPlatforms = ['darwin', 'linux', 'win32'].filter((p) => p !== process.platform);
       const badMakers = [];
-      badPlatforms.forEach(platform => badMakers.push(...getMakers(platform)));
+      badPlatforms.forEach((platform) => badMakers.push(...getMakers(platform)));
 
       const testMakeTarget = function testMakeTarget(target, shouldPass, ...options) {
         describe(`make (with target=${target})`, async () => {

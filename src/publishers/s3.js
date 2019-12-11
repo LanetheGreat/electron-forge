@@ -42,7 +42,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
       uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line
     };
 
-    await Promise.all(artifacts.map(artifactPath =>
+    await Promise.all(artifacts.map((artifactPath) =>
       new Promise(async (resolve, reject) => {
         const done = (err) => {
           if (err) return reject(err);
@@ -61,7 +61,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
         });
         d('uploading:', artifactPath);
 
-        uploader.on('error', err => done(err));
+        uploader.on('error', (err) => done(err));
         uploader.on('progress', () => {
           d(`Upload Progress (${path.basename(artifactPath)}) ${Math.round((uploader.progressAmount / uploader.progressTotal) * 100)}%`);
         });

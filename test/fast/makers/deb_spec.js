@@ -21,11 +21,11 @@ describe('deb maker', () => {
   beforeEach(() => {
     ensureFileStub = stub().returns(Promise.resolve());
     eidStub = stub().resolves();
-    eidStub.transformVersion = version => version;
+    eidStub.transformVersion = (version) => version;
     forgeConfig = { electronInstallerDebian: {} };
 
     debModule = proxyquire.noPreserveCache().noCallThru().load('../../../src/makers/linux/deb', {
-      './config-fn': config => config,
+      './config-fn': (config) => config,
       '../../util/ensure-output': { ensureFile: ensureFileStub },
       'electron-installer-debian': eidStub,
     });

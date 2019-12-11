@@ -24,7 +24,7 @@ describe('snap maker', () => {
     forgeConfig = { electronInstallerSnap: {} };
 
     snapModule = proxyquire.noPreserveCache().noCallThru().load('../../../src/makers/linux/snap', {
-      './config-fn': config => config,
+      './config-fn': (config) => config,
       '../../util/ensure-output': { ensureDirectory: ensureDirectoryStub },
       'electron-installer-snap': eisStub,
     });

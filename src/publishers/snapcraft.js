@@ -9,7 +9,7 @@ import asyncOra from '../util/ora-handler';
  * * `release`: comma-separated list of channels to release to
  */
 export default async ({ dir, artifacts, forgeConfig }) => {
-  const snapArtifacts = artifacts.filter(artifact => artifact.endsWith('.snap'));
+  const snapArtifacts = artifacts.filter((artifact) => artifact.endsWith('.snap'));
 
   if (snapArtifacts.length === 0) {
     throw 'No snap files to upload. Please ensure that "snap" is listed in the "make_targets" in Forge config.';

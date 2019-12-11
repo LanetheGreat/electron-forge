@@ -65,7 +65,7 @@ export default async (providedOptions = {}) => {
       throw `Failed to find releases for repository "${repo}".  Please check the name and try again.`;
     }
 
-    releases = releases.filter(release => !release.prerelease || prerelease);
+    releases = releases.filter((release) => !release.prerelease || prerelease);
 
     const sortedReleases = releases.sort((releaseA, releaseB) => {
       let tagA = releaseA.tag_name;
@@ -120,7 +120,7 @@ export default async (providedOptions = {}) => {
         choices,
       });
 
-      targetAsset = possibleAssets.find(asset => asset.id === assetID);
+      targetAsset = possibleAssets.find((asset) => asset.id === assetID);
     } else {
       throw 'expected a chooseAsset function to be provided but it was not';
     }
@@ -158,7 +158,7 @@ export default async (providedOptions = {}) => {
       },
     };
 
-    const suffixFnIdent = Object.keys(installActions[process.platform]).find(suffix => targetAsset.name.endsWith(suffix));
+    const suffixFnIdent = Object.keys(installActions[process.platform]).find((suffix) => targetAsset.name.endsWith(suffix));
     await installActions[process.platform][suffixFnIdent](fullFilePath, installSpinner);
   });
 };

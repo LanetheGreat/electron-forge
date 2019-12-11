@@ -20,7 +20,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
         owner: forgeConfig.github_repository.owner,
         repo: forgeConfig.github_repository.name,
         per_page: 100,
-      })).data.find(testRelease => testRelease.tag_name === (tag || `v${packageJSON.version}`));
+      })).data.find((testRelease) => testRelease.tag_name === (tag || `v${packageJSON.version}`));
       if (!release) {
         throw { code: 404 };
       }
@@ -48,14 +48,14 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
       uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line
     };
 
-    await Promise.all(artifacts.map(artifactPath =>
+    await Promise.all(artifacts.map((artifactPath) =>
       new Promise(async (resolve) => {
         const done = () => {
           uploaded += 1;
           updateSpinner();
           resolve();
         };
-        if (release.assets.find(asset => asset.name === path.basename(artifactPath))) {
+        if (release.assets.find((asset) => asset.name === path.basename(artifactPath))) {
           return done();
         }
         await github.getGitHub().repos.uploadAsset({

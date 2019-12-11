@@ -145,7 +145,7 @@ describe('install', () => {
   });
 
   it('should provide compatable assets to chooseAsset if more than one exists', async () => {
-    const chooseAsset = sinon.spy(async assets => assets[0]);
+    const chooseAsset = sinon.spy(async (assets) => assets[0]);
     fetch.get('*', [
       {
         tag_name: '1.0.0',

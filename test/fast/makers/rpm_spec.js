@@ -24,7 +24,7 @@ describe('rpm maker', () => {
     forgeConfig = { electronInstallerRedhat: {} };
 
     rpmModule = proxyquire.noPreserveCache().noCallThru().load('../../../src/makers/linux/rpm', {
-      './config-fn': config => config,
+      './config-fn': (config) => config,
       '../../util/ensure-output': { ensureFile: ensureFileStub },
       'electron-installer-redhat': eidStub,
     });

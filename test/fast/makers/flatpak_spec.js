@@ -25,7 +25,7 @@ describe('flatpak maker', () => {
 
     flatpakModule = proxyquire.noPreserveCache().noCallThru().load('../../../src/makers/linux/flatpak', {
       'fs-extra': { readdir: stub().returns(Promise.resolve([])) },
-      './config-fn': config => config,
+      './config-fn': (config) => config,
       '../../util/ensure-output': { ensureDirectory: ensureDirectoryStub },
       '@malept/electron-installer-flatpak': eidStub,
     });

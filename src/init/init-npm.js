@@ -79,7 +79,7 @@ export default async (dir, lintStyle) => {
       path.join(dir, 'node_modules', '@lanethegreat', 'electron-prebuilt-compile', 'package.json'));
 
     for (const profile of ['development', 'production']) {
-      const envTarget = content.env[profile]['application/javascript'].presets.find(x => x[0] === 'env');
+      const envTarget = content.env[profile]['application/javascript'].presets.find((x) => x[0] === 'env');
       // parseFloat strips the patch version
       // parseFloat('1.3.2') === 1.3
       // Note: This won't work if the minor version ever gets higher than 9
