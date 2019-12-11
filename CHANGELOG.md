@@ -1,3 +1,9 @@
+#### [5.3.2](https://github.com/LanetheGreat/electron-forge/releases/tag/v5.3.2) (2019-12-11)
+
+##### Chores
+
+* **build:**  updated gulp and babel packages to gulp@^4 and babel@^7. ([1474c878](https://github.com/LanetheGreat/electron-forge/commit/1474c878))
+
 #### [5.3.1](https://github.com/LanetheGreat/electron-forge/releases/tag/v5.3.1) (2019-12-10)
 
 ##### Bug Fixes
