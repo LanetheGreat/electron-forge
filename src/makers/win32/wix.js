@@ -7,6 +7,7 @@ import configFn from '../../util/config-fn';
 // electron-wix-msi doesn't set its 'os' field even though it only runs on win32
 export const isSupportedOnCurrentPlatform = async () => process.platform === 'win32';
 
+// eslint-disable-next-line object-curly-newline
 export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) => {
   const { MSICreator } = require('electron-wix-msi');
 

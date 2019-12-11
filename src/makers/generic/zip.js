@@ -21,6 +21,7 @@ const zipPromise = (from, to) =>
     });
   });
 
+// eslint-disable-next-line object-curly-newline
 export default async ({ dir, appName, targetPlatform, packageJSON }) => {
   const zipFolder = require('zip-folder');
 

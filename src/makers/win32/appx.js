@@ -32,6 +32,7 @@ function findSdkTool(exe) {
   return sdkTool;
 }
 
+// eslint-disable-next-line object-curly-newline
 export async function createDefaultCertificate(publisherName, { certFilePath, certFileName, install, program }) {
   const makeCertOptions = {
     publisherName,
@@ -52,6 +53,7 @@ function getDistinguishedNameFromAuthor(author) {
   return `CN=${getNameFromAuthor(author)}`;
 }
 
+// eslint-disable-next-line object-curly-newline
 export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) => {
   const outPath = path.resolve(dir, `../make/appx/${targetArch}`);
   await ensureDirectory(outPath);

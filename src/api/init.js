@@ -27,7 +27,7 @@ const d = debug('@lanethegreat/electron-forge:init');
  * @return {Promise} Will resolve when the initialization process is complete
  */
 export default async (providedOptions = {}) => {
-  // eslint-disable-next-line prefer-const, no-unused-vars
+  // eslint-disable-next-line prefer-const, no-unused-vars, object-curly-newline
   let { dir, interactive, lintStyle, copyCIFiles, template } = {
     dir: process.cwd(),
     interactive: false,

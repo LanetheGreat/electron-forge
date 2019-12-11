@@ -10,6 +10,7 @@ export function populateConfig({ forgeConfig, configKey, targetArch }) {
   return config;
 }
 
+// eslint-disable-next-line object-curly-newline
 export function linuxConfig({ config, pkgArch, dir, outPath }) {
   return merge({}, config, {
     arch: pkgArch,

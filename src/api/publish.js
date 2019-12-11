@@ -36,7 +36,7 @@ const d = debug('@lanethegreat/electron-forge:publish');
  * @return {Promise} Will resolve when the publish process is complete
  */
 const publish = async (providedOptions = {}) => {
-  // eslint-disable-next-line prefer-const, no-unused-vars
+  // eslint-disable-next-line prefer-const, no-unused-vars, object-curly-newline
   let { dir, interactive, authToken, tag, publishTargets, makeOptions, dryRun, dryRunResume, makeResults } = {
     dir: process.cwd(),
     interactive: false,

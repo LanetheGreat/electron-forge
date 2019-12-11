@@ -98,15 +98,20 @@ describe('publish', () => {
 
     const fakeMake = (platform) => {
       const ret = [
-        { artifacts: [
-          path.resolve(dir, `out/make/artifact1-${platform}`),
-          path.resolve(dir, `out/make/artifact2-${platform}`),
-        ] }, { artifacts: [
-          path.resolve(dir, `out/make/artifact3-${platform}`),
-        ] },
-        { artifacts: [
-          path.resolve(dir, `out/make/artifact4-${platform}`),
-        ] },
+        {
+          artifacts: [
+            path.resolve(dir, `out/make/artifact1-${platform}`),
+            path.resolve(dir, `out/make/artifact2-${platform}`),
+          ],
+        }, {
+          artifacts: [
+            path.resolve(dir, `out/make/artifact3-${platform}`),
+          ],
+        }, {
+          artifacts: [
+            path.resolve(dir, `out/make/artifact4-${platform}`),
+          ],
+        },
       ];
       const state = {
         platform,

@@ -16,6 +16,7 @@ export function debianArch(nodeArch) {
   }
 }
 
+// eslint-disable-next-line object-curly-newline
 export default async ({ dir, targetArch, forgeConfig, packageJSON }) => {
   const installer = require('electron-installer-debian');
 

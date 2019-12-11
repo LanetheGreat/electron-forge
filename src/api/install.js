@@ -37,7 +37,7 @@ const GITHUB_API = 'https://api.github.com';
  * @return {Promise} Will resolve when the install process is complete
  */
 export default async (providedOptions = {}) => {
-  // eslint-disable-next-line prefer-const, no-unused-vars
+  // eslint-disable-next-line prefer-const, no-unused-vars, object-curly-newline
   let { interactive, prerelease, repo, chooseAsset } = {
     interactive: false,
     prerelease: false,

@@ -7,6 +7,7 @@ import isInstalled from '../../util/is-installed';
 
 export const isSupportedOnCurrentPlatform = async () => isInstalled('electron-winstaller');
 
+// eslint-disable-next-line object-curly-newline
 export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) => {
   const { createWindowsInstaller } = require('electron-winstaller');
 

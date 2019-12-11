@@ -21,6 +21,7 @@ const ersPlatform = (platform, arch) => {
   }
 };
 
+// eslint-disable-next-line object-curly-newline
 export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) => {
   const ersConfig = forgeConfig.electronReleaseServer;
   if (!(ersConfig.baseUrl && ersConfig.username && ersConfig.password)) {

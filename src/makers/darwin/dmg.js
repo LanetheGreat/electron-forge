@@ -9,6 +9,7 @@ import configFn from '../../util/config-fn';
 // appdmg, which is darwin-only
 export const isSupportedOnCurrentPlatform = async () => process.platform === 'darwin';
 
+// eslint-disable-next-line object-curly-newline
 export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) => {
   const electronDMG = require('electron-installer-dmg');
 

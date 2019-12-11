@@ -32,6 +32,7 @@ describe('snap maker', () => {
   });
 
   it('should pass through correct defaults', async () => {
+    // eslint-disable-next-line object-curly-newline
     await snapMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     const opts = eisStub.firstCall.args[0];
     expect(opts).to.deep.equal({
@@ -47,6 +48,7 @@ describe('snap maker', () => {
       description: 'Snap description',
     };
 
+    // eslint-disable-next-line object-curly-newline
     await snapMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     const opts = eisStub.firstCall.args[0];
     expect(opts).to.deep.equal({

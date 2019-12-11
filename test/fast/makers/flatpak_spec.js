@@ -33,6 +33,7 @@ describe('flatpak maker', () => {
   });
 
   it('should pass through correct defaults', async () => {
+    // eslint-disable-next-line object-curly-newline
     await flatpakMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     const opts = eidStub.firstCall.args[0];
     expect(opts).to.deep.equal({
@@ -51,6 +52,7 @@ describe('flatpak maker', () => {
       },
     };
 
+    // eslint-disable-next-line object-curly-newline
     await flatpakMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     const opts = eidStub.firstCall.args[0];
     expect(opts).to.deep.equal({

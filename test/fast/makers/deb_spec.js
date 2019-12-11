@@ -33,6 +33,7 @@ describe('deb maker', () => {
   });
 
   it('should pass through correct defaults', async () => {
+    // eslint-disable-next-line object-curly-newline
     await debMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     const opts = eidStub.firstCall.args[0];
     expect(opts).to.deep.equal({
@@ -51,6 +52,7 @@ describe('deb maker', () => {
       },
     };
 
+    // eslint-disable-next-line object-curly-newline
     await debMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     const opts = eidStub.firstCall.args[0];
     expect(opts).to.deep.equal({
@@ -68,6 +70,7 @@ describe('deb maker', () => {
       eidStub.transformVersion = require('electron-installer-debian').transformVersion;
 
       packageJSON.version = '1.2.3-beta.4';
+      // eslint-disable-next-line object-curly-newline
       const outPath = await debMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
       expect(outPath).to.match(/1\.2\.3~beta\.4/);
     });

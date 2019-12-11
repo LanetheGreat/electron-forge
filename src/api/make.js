@@ -42,7 +42,7 @@ import packager from './package';
  * @return {Promise<Array<MakeResult>>} Will resolve when the make process is complete
  */
 export default async (providedOptions = {}) => {
-  // eslint-disable-next-line prefer-const, no-unused-vars
+  // eslint-disable-next-line prefer-const, no-unused-vars, object-curly-newline
   let { dir, interactive, skipPackage, overrideTargets, arch, platform } = {
     dir: process.cwd(),
     interactive: false,

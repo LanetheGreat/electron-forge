@@ -35,6 +35,7 @@ describe('dmg maker', () => {
   });
 
   it('should pass through correct defaults', async () => {
+    // eslint-disable-next-line object-curly-newline
     await dmgMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     const opts = eidStub.firstCall.args[0];
     expect(opts).to.deep.equal({
@@ -46,18 +47,21 @@ describe('dmg maker', () => {
   });
 
   it('should attempt to rename the DMG file if no custom name is set', async () => {
+    // eslint-disable-next-line object-curly-newline
     await dmgMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     expect(renameStub.callCount).to.equal(1);
     expect(renameStub.firstCall.args[1]).to.include('1.2.3');
   });
 
   it('should rename the DMG file to include the version if no custom name is set', async () => {
+    // eslint-disable-next-line object-curly-newline
     await dmgMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     expect(renameStub.firstCall.args[1]).to.include('1.2.3');
   });
 
   it('should not attempt to rename the DMG file if a custom name is set', async () => {
     forgeConfig.electronInstallerDMG.name = 'foobar';
+    // eslint-disable-next-line object-curly-newline
     await dmgMaker({ dir, appName, targetArch, forgeConfig, packageJSON });
     expect(renameStub.callCount).to.equal(0);
   });

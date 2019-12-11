@@ -32,7 +32,12 @@ const proxify = (object, envPrefix) => {
       if (target.hasOwnProperty(name)) {
         return Object.getOwnPropertyDescriptor(target, name);
       } else if (envValue) {
-        return { writable: true, enumerable: true, configurable: true, value: envValue };
+        return {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: envValue,
+        };
       }
     },
   });

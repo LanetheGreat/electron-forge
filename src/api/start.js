@@ -26,7 +26,7 @@ import runHook from '../util/hook';
  * @return {Promise} Will resolve when the application is launched
  */
 export default async (providedOptions = {}) => {
-  // eslint-disable-next-line prefer-const, no-unused-vars
+  // eslint-disable-next-line prefer-const, no-unused-vars, object-curly-newline
   let { dir, interactive, enableLogging, appPath, args, runAsNode, inspect } = {
     dir: process.cwd(),
     appPath: '.',

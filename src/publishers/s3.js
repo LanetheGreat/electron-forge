@@ -13,6 +13,7 @@ AWS.util.update(AWS.S3.prototype, {
   },
 });
 
+// eslint-disable-next-line object-curly-newline
 export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) => {
   const s3Config = forgeConfig.s3;
 

@@ -59,7 +59,7 @@ function sequentialHooks(hooks) {
  * @return {Promise} Will resolve when the package process is complete
  */
 export default async (providedOptions = {}) => {
-  // eslint-disable-next-line prefer-const, no-unused-vars
+  // eslint-disable-next-line prefer-const, no-unused-vars, object-curly-newline
   let { dir, interactive, arch, platform } = {
     dir: process.cwd(),
     interactive: false,
