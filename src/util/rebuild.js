@@ -1,6 +1,6 @@
 import rebuild from 'electron-rebuild';
 
-import asyncOra from '../util/ora-handler';
+import asyncOra from './ora-handler';
 
 export default async (buildPath, electronVersion, platform, arch, config = {}) => {
   if (!electronVersion) {

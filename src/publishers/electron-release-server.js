@@ -43,17 +43,16 @@ export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) =
     },
   })).json();
 
-  const authFetch = (apiPath, options) =>
-    fetch(
-      api(apiPath),
-      {
-        ...options,
-        headers: {
-          ...(options || {}).headers,
-          Authorization: `Bearer ${token}`,
-        },
+  const authFetch = (apiPath, options) => fetch(
+    api(apiPath),
+    {
+      ...options,
+      headers: {
+        ...(options || {}).headers,
+        Authorization: `Bearer ${token}`,
       },
-    );
+    },
+  );
 
   const versions = await (await authFetch('api/version')).json();
   const existingVersion = versions.find((version) => version.name === packageJSON.version);
@@ -89,37 +88,35 @@ export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) =
       uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line no-param-reassign
     };
 
-    await Promise.all(artifacts.map((artifactPath) =>
-      new Promise(async (resolve, reject) => {
-        if (existingVersion) {
-          const existingAsset = existingVersion.assets.find((asset) => asset.name === path.basename(artifactPath));
-          if (existingAsset) {
-            d('asset at path:', artifactPath, 'already exists on server');
-            uploaded += 1;
-            updateSpinner();
-            return;
-          }
-        }
-        try {
-          d('attempting to upload asset:', artifactPath);
-          const artifactForm = new FormData();
-          artifactForm.append('token', token);
-          artifactForm.append('version', packageJSON.version);
-          artifactForm.append('platform', ersPlatform(platform, arch));
-          artifactForm.append('file', fs.createReadStream(artifactPath));
-          await authFetch('api/asset', {
-            method: 'POST',
-            body: artifactForm,
-            headers: artifactForm.getHeaders(),
-          });
-          d('upload successful for asset:', artifactPath);
+    await Promise.all(artifacts.map((artifactPath) => new Promise(async (resolve, reject) => {
+      if (existingVersion) {
+        const existingAsset = existingVersion.assets.find((asset) => asset.name === path.basename(artifactPath));
+        if (existingAsset) {
+          d('asset at path:', artifactPath, 'already exists on server');
           uploaded += 1;
           updateSpinner();
-          resolve();
-        } catch (err) {
-          reject(err);
+          return;
         }
-      }),
-    ));
+      }
+      try {
+        d('attempting to upload asset:', artifactPath);
+        const artifactForm = new FormData();
+        artifactForm.append('token', token);
+        artifactForm.append('version', packageJSON.version);
+        artifactForm.append('platform', ersPlatform(platform, arch));
+        artifactForm.append('file', fs.createReadStream(artifactPath));
+        await authFetch('api/asset', {
+          method: 'POST',
+          body: artifactForm,
+          headers: artifactForm.getHeaders(),
+        });
+        d('upload successful for asset:', artifactPath);
+        uploaded += 1;
+        updateSpinner();
+        resolve();
+      } catch (err) {
+        reject(err);
+      }
+    })));
   });
 };

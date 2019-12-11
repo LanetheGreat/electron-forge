@@ -18,7 +18,7 @@ function watch() {
 
 function link(cb) {
   const files = fs.readdirSync(path.resolve(__dirname, './src'))
-                  .filter((f) => f.endsWith('.js'));
+    .filter((f) => f.endsWith('.js'));
   const packageJSON = require('./package.json');
 
   if (!fs.existsSync(path.resolve(__dirname, './dist'))) {

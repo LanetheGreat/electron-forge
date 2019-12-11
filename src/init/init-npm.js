@@ -27,7 +27,8 @@ export const airbnbDeps = ['eslint@^3', 'eslint-config-airbnb@^15', 'eslint-plug
 export default async (dir, lintStyle) => {
   await asyncOra('Initializing NPM Module', async () => {
     const packageJSON = await readPackageJSON(path.resolve(__dirname, '../../tmpl'));
-    packageJSON.productName = packageJSON.name = path.basename(dir).toLowerCase();
+    packageJSON.name = path.basename(dir).toLowerCase();
+    packageJSON.productName = packageJSON.name;
     packageJSON.author = await username();
     setInitialForgeConfig(packageJSON);
 
@@ -76,7 +77,8 @@ export default async (dir, lintStyle) => {
     // actual version of Electron that we installed
     const content = await fs.readJson(path.join(dir, '.compilerc'), 'utf8');
     const electronPrebuilt = require(
-      path.join(dir, 'node_modules', '@lanethegreat', 'electron-prebuilt-compile', 'package.json'));
+      path.join(dir, 'node_modules', '@lanethegreat', 'electron-prebuilt-compile', 'package.json'),
+    );
 
     for (const profile of ['development', 'production']) {
       const envTarget = content.env[profile]['application/javascript'].presets.find((x) => x[0] === 'env');

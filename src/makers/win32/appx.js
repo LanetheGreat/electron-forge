@@ -15,9 +15,9 @@ export const isSupportedOnCurrentPlatform = async () => process.platform === 'wi
 // NB: This is not a typo, we require AppXs to be built on 64-bit
 // but if we're running in a 32-bit node.js process, we're going to
 // be Wow64 redirected
-const windowsSdkPath = process.arch === 'x64' ?
-  'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64' :
-  'C:\\Program Files\\Windows Kits\\10\\bin\\x64';
+const windowsSdkPath = process.arch === 'x64'
+  ? 'C:\\Program Files (x86)\\Windows Kits\\10\\bin\\x64'
+  : 'C:\\Program Files\\Windows Kits\\10\\bin\\x64';
 
 function findSdkTool(exe) {
   let sdkTool = path.join(windowsSdkPath, exe);
@@ -88,9 +88,9 @@ export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) =>
       const noBeta = opts.packageVersion.replace(/-.*/, '');
       opts.packageVersion = `${noBeta}.0`;
     } else {
-      const err = "Windows Store version numbers don't support semver beta tags. To" +
-        'automatically fix this, set makeVersionWinStoreCompatible to true or ' +
-        'explicitly set packageVersion to a version of the format X.Y.Z.A';
+      const err = "Windows Store version numbers don't support semver beta tags. To"
+        + 'automatically fix this, set makeVersionWinStoreCompatible to true or '
+        + 'explicitly set packageVersion to a version of the format X.Y.Z.A';
 
       throw new Error(err);
     }

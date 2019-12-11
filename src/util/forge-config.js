@@ -31,7 +31,9 @@ const proxify = (object, envPrefix) => {
       // eslint-disable-next-line no-prototype-builtins
       if (target.hasOwnProperty(name)) {
         return Object.getOwnPropertyDescriptor(target, name);
-      } else if (envValue) {
+      }
+
+      if (envValue) {
         return {
           writable: true,
           enumerable: true,

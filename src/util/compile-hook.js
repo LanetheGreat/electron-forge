@@ -4,7 +4,7 @@ import path from 'path';
 import asyncOra from './ora-handler';
 import readPackageJSON from './read-package-json';
 
-export default async(originalDir, buildPath, electronVersion, pPlatform, pArch, done) => {
+export default async (originalDir, buildPath, electronVersion, pPlatform, pArch, done) => {
   await asyncOra('Compiling Application', async () => {
     const compileCLI = require(path.resolve(originalDir, 'node_modules/@lanethegreat/electron-compile/lib/cli.js'));
 
@@ -14,7 +14,7 @@ export default async(originalDir, buildPath, electronVersion, pPlatform, pArch, 
           const fullPath = path.join(appDir, entry);
 
           if ((await fs.stat(fullPath)).isDirectory()) {
-            const log = console.log;
+            const { log } = console;
             console.log = () => {};
             await compileCLI.main(appDir, [fullPath]);
             console.log = log;

@@ -81,7 +81,9 @@ const publish = async (providedOptions = {}) => {
       });
     }
     return;
-  } else if (!makeResults) {
+  }
+
+  if (!makeResults) {
     d('triggering make');
     makeResults = await make({
       dir,

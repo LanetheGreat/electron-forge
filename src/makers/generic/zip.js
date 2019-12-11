@@ -6,20 +6,19 @@ import { ensureFile } from '../../util/ensure-output';
 
 export const isSupportedOnCurrentPlatform = async () => true;
 
-const zipPromise = (from, to) =>
-  new Promise((resolve, reject) => {
-    const child = spawn('zip', ['-r', '-y', to, path.basename(from)], {
-      cwd: path.dirname(from),
-    });
-
-    child.stdout.on('data', () => {});
-    child.stderr.on('data', () => {});
-
-    child.on('close', (code) => {
-      if (code === 0) return resolve();
-      reject(new Error(`Failed to zip, exitted with code: ${code}`));
-    });
+const zipPromise = (from, to) => new Promise((resolve, reject) => {
+  const child = spawn('zip', ['-r', '-y', to, path.basename(from)], {
+    cwd: path.dirname(from),
   });
+
+  child.stdout.on('data', () => {});
+  child.stderr.on('data', () => {});
+
+  child.on('close', (code) => {
+    if (code === 0) return resolve();
+    reject(new Error(`Failed to zip, exitted with code: ${code}`));
+  });
+});
 
 // eslint-disable-next-line object-curly-newline
 export default async ({ dir, appName, targetPlatform, packageJSON }) => {

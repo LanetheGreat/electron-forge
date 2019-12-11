@@ -10,7 +10,6 @@ const which = async (type, prog, promise) => {
   }
 };
 
-export const sudo = (type, prog, args) =>
-  which(type, prog, pify(sudoPrompt.exec)(`${prog} ${args}`, { name: 'Electron Forge' }));
+export const sudo = (type, prog, args) => which(type, prog, pify(sudoPrompt.exec)(`${prog} ${args}`, { name: 'Electron Forge' }));
 
 export default which;

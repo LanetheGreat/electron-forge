@@ -62,8 +62,8 @@ if (process.argv[2] !== 'completion') {
     });
 
     if (!goodSystem) {
-      console.error(('It looks like you are missing some dependencies you need to get Electron running.\n' +
-                    'Make sure you have git installed and Node.js version 8.0.0+').red);
+      console.error(('It looks like you are missing some dependencies you need to get Electron running.\n'
+                    + 'Make sure you have git installed and Node.js version 8.0.0+').red);
       process.exit(1);
     }
 

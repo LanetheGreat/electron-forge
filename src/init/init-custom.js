@@ -39,7 +39,7 @@ export default async (dir, template, lintStyle) => {
   });
 
   await asyncOra('Copying Template Files', async () => {
-    const templateDirectory = templateModule.templateDirectory;
+    const { templateDirectory } = templateModule;
     if (templateDirectory) {
       const tmplPath = templateDirectory;
       if (!path.isAbsolute(templateDirectory)) {

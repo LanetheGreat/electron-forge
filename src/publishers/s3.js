@@ -43,31 +43,29 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
       uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line
     };
 
-    await Promise.all(artifacts.map((artifactPath) =>
-      new Promise(async (resolve, reject) => {
-        const done = (err) => {
-          if (err) return reject(err);
-          uploaded += 1;
-          updateSpinner();
-          resolve();
-        };
+    await Promise.all(artifacts.map((artifactPath) => new Promise(async (resolve, reject) => {
+      const done = (err) => {
+        if (err) return reject(err);
+        uploaded += 1;
+        updateSpinner();
+        resolve();
+      };
 
-        const uploader = client.uploadFile({
-          localFile: artifactPath,
-          s3Params: {
-            Bucket: s3Config.bucket,
-            Key: `${folder}/${path.basename(artifactPath)}`,
-            ACL: s3Config.public ? 'public-read' : 'private',
-          },
-        });
-        d('uploading:', artifactPath);
+      const uploader = client.uploadFile({
+        localFile: artifactPath,
+        s3Params: {
+          Bucket: s3Config.bucket,
+          Key: `${folder}/${path.basename(artifactPath)}`,
+          ACL: s3Config.public ? 'public-read' : 'private',
+        },
+      });
+      d('uploading:', artifactPath);
 
-        uploader.on('error', (err) => done(err));
-        uploader.on('progress', () => {
-          d(`Upload Progress (${path.basename(artifactPath)}) ${Math.round((uploader.progressAmount / uploader.progressTotal) * 100)}%`);
-        });
-        uploader.on('end', () => done());
-      }),
-    ));
+      uploader.on('error', (err) => done(err));
+      uploader.on('progress', () => {
+        d(`Upload Progress (${path.basename(artifactPath)}) ${Math.round((uploader.progressAmount / uploader.progressTotal) * 100)}%`);
+      });
+      uploader.on('end', () => done());
+    })));
   });
 };

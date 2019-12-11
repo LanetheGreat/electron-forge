@@ -62,8 +62,8 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
 
       it('should have installed the initial node_modules', async () => {
         expectProjectPathExists('node_modules', 'folder');
-        expect(await fs.pathExists(
-          path.resolve(dir, 'node_modules/@lanethegreat/electron-prebuilt-compile')),
+        expect(
+          await fs.pathExists(path.resolve(dir, 'node_modules/@lanethegreat/electron-prebuilt-compile')),
           '@lanethegreat/electron-prebuilt-compile should exist',
         ).to.equal(true);
         expect(

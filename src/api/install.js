@@ -74,11 +74,11 @@ export default async (providedOptions = {}) => {
       if (tagB.substr(0, 1) === 'v') tagB = tagB.substr(1);
       return (semver.gt(tagB, tagA) ? 1 : -1);
     });
-    latestRelease = sortedReleases[0];
+    [latestRelease] = sortedReleases;
 
     searchSpinner.text = 'Searching for Releases'; // eslint-disable-line
 
-    const assets = latestRelease.assets;
+    const { assets } = latestRelease;
     if (!assets || !Array.isArray(assets)) {
       throw 'Could not find any assets for the latest release';
     }

@@ -7,7 +7,9 @@ try {
   const installer = new Installer(options, complete);
 
   let shell = process.env.SHELL;
-  if (shell) shell = shell.split((process.platform !== 'win32') ? '/' : '\\').slice(-1)[0];
+  if (shell) {
+    [shell] = shell.split((process.platform !== 'win32') ? '/' : '\\').slice(-1);
+  }
 
   if (installer[shell]) {
     installer.handle(options.name, options)

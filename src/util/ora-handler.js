@@ -3,8 +3,11 @@ import ora from './ora';
 
 class MockOra {
   succeed() { return this; }
+
   fail() { return this; }
+
   start() { return this; }
+
   stop() { return this; }
 }
 
