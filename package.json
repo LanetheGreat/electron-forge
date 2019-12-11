@@ -34,13 +34,12 @@
   "author": "Samuel Attard",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
     "asar": "^2.0.0",
     "babel-eslint": "^7.0.0",
     "babel-plugin-istanbul": "^4.0.0",
-    "babel-plugin-syntax-async-functions": "^6.13.0",
-    "babel-plugin-transform-async-to-module-method": "^6.16.0",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-env": "^1.6.0",
     "chai": "^4.0.0",
     "chai-as-promised": "^7.0.0",
     "commitizen": "^3.0.0",
@@ -56,8 +55,8 @@
     "eslint-plugin-mocha": "^6.0.0",
     "fetch-mock": "^8.0.0",
     "generate-changelog": "^1.0.2",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
     "mocha": "^6.0.0",
     "nodemon": "^2.0.0",
     "nyc": "^14.0.0",
@@ -75,7 +74,7 @@
     },
     "presets": [
       [
-        "env",
+        "@babel/preset-env",
         {
           "targets": {
             "node": "8"
@@ -84,15 +83,7 @@
       ]
     ],
     "plugins": [
-      "transform-runtime",
-      "syntax-async-functions",
-      [
-        "transform-async-to-module-method",
-        {
-          "module": "bluebird",
-          "method": "coroutine"
-        }
-      ]
+      "@babel/plugin-transform-runtime"
     ]
   },
   "nyc": {
@@ -106,10 +97,10 @@
     "cache": true
   },
   "dependencies": {
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
     "@octokit/rest": "^16.0.0",
     "aws-sdk": "^2.9.0",
-    "babel-register": "^6.16.3",
-    "bluebird": "^3.4.6",
     "colors": "^1.1.2",
     "commander": "^4.0.0",
     "cross-spawn-promise": "^0.10.1",

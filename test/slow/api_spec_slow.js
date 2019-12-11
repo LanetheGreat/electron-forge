@@ -64,8 +64,8 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
           '@lanethegreat/electron-prebuilt-compile should exist'
         ).to.equal(true);
         expect(
-          await fs.pathExists(path.resolve(dir, 'node_modules/babel-core')),
-          'babel-core should exist'
+          await fs.pathExists(path.resolve(dir, 'node_modules/@babel/core')),
+          '@babel/core should exist'
         ).to.equal(true);
         expect(
           await fs.pathExists(path.resolve(dir, 'node_modules/@lanethegreat/electron-forge')),

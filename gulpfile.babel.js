@@ -1,27 +1,29 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-import gulp from 'gulp';
+import gulp, { series } from 'gulp';
 
 import babel from 'gulp-babel';
 import fs from 'fs';
 import path from 'path';
 
-gulp.task('transpile', () =>
-    gulp.src('./src/**/*.js')
-      .pipe(babel())
-      .pipe(gulp.dest('./dist'))
-);
+function transpile() {
+  return gulp.src('./src/**/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('./dist'));
+}
 
-gulp.task('watch', ['build'], () => {
-  gulp.watch('./src/**/*.js', ['transpile']);
-});
+function watch() {
+  gulp.watch('./src/**/*.js', transpile);
+}
 
-gulp.task('link', () => {
+function link(cb) {
   const files = fs.readdirSync(path.resolve(__dirname, './src'))
-    .filter(f => f.endsWith('.js'));
+                  .filter(f => f.endsWith('.js'));
   const packageJSON = require('./package.json');
 
-  if (!fs.existsSync(path.resolve(__dirname, './dist'))) fs.mkdirSync(path.resolve(__dirname, './dist'));
+  if (!fs.existsSync(path.resolve(__dirname, './dist'))) {
+    fs.mkdirSync(path.resolve(__dirname, './dist'));
+  }
 
   Object.keys(packageJSON.bin).forEach((binName) => {
     if (binName === 'electron-forge') return;
@@ -35,6 +37,8 @@ gulp.task('link', () => {
       });
     }
   });
-});
+  cb();
+}
 
-gulp.task('build', ['transpile', 'link']);
+exports.build = series(transpile, link);
+exports.watch = watch;

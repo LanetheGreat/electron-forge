@@ -10,8 +10,15 @@ import asyncOra from '../util/ora-handler';
 
 const d = debug('@lanethegreat/electron-forge:init:npm');
 
-export const deps = ['@lanethegreat/electron-compile', 'electron-squirrel-startup'];
-export const devDeps = ['babel-preset-env', 'babel-preset-react', 'babel-plugin-transform-async-to-generator', '@lanethegreat/electron-forge'];
+export const deps = ['@lanethegreat/electron-compile', 'electron-squirrel-startup', '@babel/runtime'];
+export const devDeps = [
+  '@babel/core',
+  '@babel/preset-env',
+  '@babel/preset-react',
+  '@babel/plugin-transform-async-to-generator',
+  '@babel/plugin-transform-runtime',
+  '@lanethegreat/electron-forge',
+];
 export const exactDevDeps = ['@lanethegreat/electron-prebuilt-compile'];
 export const standardDeps = ['standard'];
 export const airbnbDeps = ['eslint@^3', 'eslint-config-airbnb@^15', 'eslint-plugin-import@^2',
@@ -65,7 +72,7 @@ export default async (dir, lintStyle) => {
         break;
     }
 
-    // NB: For babel-preset-env to work correctly, it needs to know the
+    // NB: For @babel/preset-env to work correctly, it needs to know the
     // actual version of Electron that we installed
     const content = await fs.readJson(path.join(dir, '.compilerc'), 'utf8');
     const electronPrebuilt = require(
