@@ -42,9 +42,17 @@ export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) =
     },
   })).json();
 
-  const authFetch = (apiPath, options) => fetch(api(apiPath), Object.assign({}, options || {}, {
-    headers: Object.assign({}, (options || {}).headers, { Authorization: `Bearer ${token}` }),
-  }));
+  const authFetch = (apiPath, options) =>
+    fetch(
+      api(apiPath),
+      {
+        ...options,
+        headers: {
+          ...(options || {}).headers,
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 
   const versions = await (await authFetch('api/version')).json();
   const existingVersion = versions.find(version => version.name === packageJSON.version);

@@ -13,16 +13,16 @@ export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) =>
   const outPath = path.resolve(dir, `../make/wix/${targetArch}`);
   await ensureDirectory(outPath);
 
-  const creator = new MSICreator(Object.assign({
+  const creator = new MSICreator({
     description: packageJSON.description,
     name: appName,
     version: packageJSON.version,
     manufacturer: getNameFromAuthor(packageJSON.author),
     exe: `${appName}.exe`,
-  }, configFn(forgeConfig.electronWixMSIConfig, targetArch), {
+    ...configFn(forgeConfig.electronWixMSIConfig, targetArch),
     appDirectory: dir,
     outputDirectory: outPath,
-  }));
+  });
 
   await creator.create();
   const { msiFile } = await creator.compile();

@@ -37,7 +37,7 @@ const d = debug('@lanethegreat/electron-forge:publish');
  */
 const publish = async (providedOptions = {}) => {
   // eslint-disable-next-line prefer-const, no-unused-vars
-  let { dir, interactive, authToken, tag, publishTargets, makeOptions, dryRun, dryRunResume, makeResults } = Object.assign({
+  let { dir, interactive, authToken, tag, publishTargets, makeOptions, dryRun, dryRunResume, makeResults } = {
     dir: process.cwd(),
     interactive: false,
     tag: null,
@@ -46,7 +46,8 @@ const publish = async (providedOptions = {}) => {
     dryRun: false,
     dryRunResume: false,
     makeResults: null,
-  }, providedOptions);
+    ...providedOptions,
+  };
   asyncOra.interactive = interactive;
 
   if (dryRun && dryRunResume) {
@@ -82,10 +83,11 @@ const publish = async (providedOptions = {}) => {
     return;
   } else if (!makeResults) {
     d('triggering make');
-    makeResults = await make(Object.assign({
+    makeResults = await make({
       dir,
       interactive,
-    }, makeOptions));
+      ...makeOptions,
+    });
   } else {
     // Restore values from dry run
     d('restoring publish settings from dry run');

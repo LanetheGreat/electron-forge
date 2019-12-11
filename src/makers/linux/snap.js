@@ -16,7 +16,10 @@ export default async ({ dir, targetArch, forgeConfig }) => {
     dest: outPath,
     src: dir,
   };
-  const snapConfig = Object.assign({}, configFn(forgeConfig.electronInstallerSnap, targetArch), snapDefaults);
+  const snapConfig = {
+    ...configFn(forgeConfig.electronInstallerSnap, targetArch),
+    ...snapDefaults,
+  };
 
   return [await installer(snapConfig)];
 };

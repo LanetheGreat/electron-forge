@@ -24,10 +24,11 @@ const d = debug('@lanethegreat/electron-forge:lint');
  */
 export default async (providedOptions = {}) => {
   // eslint-disable-next-line prefer-const, no-unused-vars
-  let { dir, interactive } = Object.assign({
+  let { dir, interactive } = {
     dir: process.cwd(),
     interactive: false,
-  }, providedOptions);
+    ...providedOptions,
+  };
   asyncOra.interactive = interactive;
 
   let success = true;

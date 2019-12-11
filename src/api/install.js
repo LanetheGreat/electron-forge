@@ -38,10 +38,11 @@ const GITHUB_API = 'https://api.github.com';
  */
 export default async (providedOptions = {}) => {
   // eslint-disable-next-line prefer-const, no-unused-vars
-  let { interactive, prerelease, repo, chooseAsset } = Object.assign({
+  let { interactive, prerelease, repo, chooseAsset } = {
     interactive: false,
     prerelease: false,
-  }, providedOptions);
+    ...providedOptions,
+  };
   asyncOra.interactive = interactive;
 
   let latestRelease;

@@ -43,13 +43,14 @@ import packager from './package';
  */
 export default async (providedOptions = {}) => {
   // eslint-disable-next-line prefer-const, no-unused-vars
-  let { dir, interactive, skipPackage, overrideTargets, arch, platform } = Object.assign({
+  let { dir, interactive, skipPackage, overrideTargets, arch, platform } = {
     dir: process.cwd(),
     interactive: false,
     skipPackage: false,
     arch: hostArch(),
     platform: process.platform,
-  }, providedOptions);
+    ...providedOptions,
+  };
 
   asyncOra.interactive = interactive;
 

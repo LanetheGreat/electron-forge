@@ -64,7 +64,7 @@ export default async (dir) => {
   } else if (typeof forgeConfig !== 'object') {
     throw new Error('Expected packageJSON.config.forge to be an object or point to a requirable JS file');
   }
-  forgeConfig = Object.assign({
+  forgeConfig = {
     make_targets: {},
     publish_targets: {},
     electronPackagerConfig: {},
@@ -76,21 +76,27 @@ export default async (dir) => {
     s3: {},
     github_repository: {},
     electronReleaseServer: {},
-  }, forgeConfig);
-  forgeConfig.make_targets = Object.assign({
+    ...forgeConfig,
+  };
+  forgeConfig.make_targets = {
     win32: ['squirrel'],
     darwin: ['zip'],
     mas: ['zip'],
     linux: ['deb', 'rpm'],
-  }, forgeConfig.make_targets);
-  forgeConfig.publish_targets = Object.assign({
+    ...forgeConfig.make_targets,
+  };
+  forgeConfig.publish_targets = {
     win32: ['github'],
     darwin: ['github'],
     mas: ['github'],
     linux: ['github'],
-  }, forgeConfig.publish_targets);
+    ...forgeConfig.publish_targets,
+  };
 
-  const templateObj = Object.assign({}, packageJSON, { year: (new Date()).getFullYear() });
+  const templateObj = {
+    ...packageJSON,
+    year: (new Date()).getFullYear(),
+  };
   const template = (obj) => {
     Object.keys(obj).forEach((objKey) => {
       if (typeof obj[objKey] === 'object' && obj !== null) {

@@ -35,11 +35,12 @@ const d = debug('@lanethegreat/electron-forge:import');
  * @return {Promise} Will resolve when the import process is complete
  */
 export default async (providedOptions = {}) => {
-  const { dir, interactive, updateScripts } = Object.assign({
+  const { dir, interactive, updateScripts } = {
     dir: process.cwd(),
     interactive: false,
     updateScripts: true,
-  }, providedOptions);
+    ...providedOptions,
+  };
 
   const outDir = providedOptions.outDir || 'out';
   asyncOra.interactive = interactive;
@@ -219,9 +220,10 @@ export default async (providedOptions = {}) => {
         compileConfig = await fs.readJson(compilePath, 'utf8');
       }
 
-      await fs.writeJson(compilePath, Object.assign(compileConfig, {
+      await fs.writeJson(compilePath, {
+        ...compileConfig,
         'application/javascript': babelConfig,
-      }), { spaces: 2 });
+      }, { spaces: 2 });
     });
 
     info(interactive, 'NOTE: You might be able to remove your `.compilerc` file completely if you are only using the `es2016` and `react` presets'.yellow);

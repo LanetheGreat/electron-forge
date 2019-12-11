@@ -109,7 +109,9 @@ describe('start', () => {
 
   it('should throw if no version is in package.json', async () => {
     resolveStub.returnsArg(0);
-    packageJSON = Object.assign({}, packageJSON);
+    packageJSON = {
+      ...packageJSON,
+    };
     delete packageJSON.version;
     await expect(start({
       dir: __dirname,

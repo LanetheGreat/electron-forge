@@ -28,13 +28,14 @@ const d = debug('@lanethegreat/electron-forge:init');
  */
 export default async (providedOptions = {}) => {
   // eslint-disable-next-line prefer-const, no-unused-vars
-  let { dir, interactive, lintStyle, copyCIFiles, template } = Object.assign({
+  let { dir, interactive, lintStyle, copyCIFiles, template } = {
     dir: process.cwd(),
     interactive: false,
     lintStyle: 'airbnb',
     copyCIFiles: false,
     template: null,
-  }, providedOptions);
+    ...providedOptions,
+  };
   asyncOra.interactive = interactive;
 
   d(`Initializing in: ${dir}`);

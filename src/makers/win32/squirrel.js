@@ -13,15 +13,15 @@ export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) =>
   const outPath = path.resolve(dir, `../make/squirrel.windows/${targetArch}`);
   await ensureDirectory(outPath);
 
-  const winstallerConfig = Object.assign({
+  const winstallerConfig = {
     name: appName,
     noMsi: true,
     exe: `${appName}.exe`,
     setupExe: `${appName}-${packageJSON.version} Setup.exe`,
-  }, configFn(forgeConfig.electronWinstallerConfig, targetArch), {
+    ...configFn(forgeConfig.electronWinstallerConfig, targetArch),
     appDirectory: dir,
     outputDirectory: outPath,
-  });
+  };
 
   await createWindowsInstaller(winstallerConfig);
 

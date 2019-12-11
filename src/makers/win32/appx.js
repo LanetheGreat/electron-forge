@@ -58,7 +58,7 @@ export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) =>
 
   const userConfig = configFn(forgeConfig.windowsStoreConfig, targetArch);
 
-  const opts = Object.assign({
+  const opts = {
     publisher: getDistinguishedNameFromAuthor(packageJSON.author),
     flatten: false,
     deploy: false,
@@ -68,10 +68,10 @@ export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) =>
     packageDescription: packageJSON.description || appName,
     packageExecutable: `app\\${appName}.exe`,
     windowsKit: userConfig.windowsKit || path.dirname(findSdkTool('makeappx.exe')),
-  }, userConfig, {
+    ...userConfig,
     inputDirectory: dir,
     outputDirectory: outPath,
-  });
+  };
 
   if (!opts.publisher) {
     throw 'Please set config.forge.windowsStoreConfig.publisher or author.name in package.json for the appx target';

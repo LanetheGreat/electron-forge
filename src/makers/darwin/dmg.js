@@ -17,13 +17,13 @@ export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) =>
   const outPath = path.resolve(dir, '../make', `${userConfig.name || appName}.dmg`);
   const wantedOutPath = path.resolve(dir, '../make', `${appName}-${packageJSON.version}.dmg`);
   await ensureFile(outPath);
-  const dmgConfig = Object.assign({
+  const dmgConfig = {
     overwrite: true,
     name: appName,
-  }, userConfig, {
+    ...userConfig,
     appPath: path.resolve(dir, `${appName}.app`),
     out: path.dirname(outPath),
-  });
+  };
   await pify(electronDMG)(dmgConfig);
   if (!userConfig.name) {
     await fs.rename(outPath, wantedOutPath);

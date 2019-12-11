@@ -36,7 +36,10 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
       if (beforeInit) {
         beforeInit();
       }
-      await forge.init(Object.assign({}, params, { dir }));
+      await forge.init({
+        ...params,
+        dir,
+      });
     });
   };
 

@@ -27,7 +27,7 @@ import runHook from '../util/hook';
  */
 export default async (providedOptions = {}) => {
   // eslint-disable-next-line prefer-const, no-unused-vars
-  let { dir, interactive, enableLogging, appPath, args, runAsNode, inspect } = Object.assign({
+  let { dir, interactive, enableLogging, appPath, args, runAsNode, inspect } = {
     dir: process.cwd(),
     appPath: '.',
     interactive: false,
@@ -35,7 +35,8 @@ export default async (providedOptions = {}) => {
     args: [],
     runAsNode: false,
     inspect: false,
-  }, providedOptions);
+    ...providedOptions,
+  };
   asyncOra.interactive = interactive;
 
   await asyncOra('Locating Application', async () => {
@@ -59,10 +60,13 @@ export default async (providedOptions = {}) => {
   const spawnOpts = {
     cwd: dir,
     stdio: 'inherit',
-    env: Object.assign({}, process.env, enableLogging ? {
-      ELECTRON_ENABLE_LOGGING: true,
-      ELECTRON_ENABLE_STACK_DUMPING: true,
-    } : {}),
+    env: {
+      ...process.env,
+      ...(enableLogging ? {
+        ELECTRON_ENABLE_LOGGING: true,
+        ELECTRON_ENABLE_STACK_DUMPING: true,
+      } : {}),
+    },
   };
 
   if (runAsNode) {

@@ -60,12 +60,13 @@ function sequentialHooks(hooks) {
  */
 export default async (providedOptions = {}) => {
   // eslint-disable-next-line prefer-const, no-unused-vars
-  let { dir, interactive, arch, platform } = Object.assign({
+  let { dir, interactive, arch, platform } = {
     dir: process.cwd(),
     interactive: false,
     arch: hostArch(),
     platform: process.platform,
-  }, providedOptions);
+    ...providedOptions,
+  };
 
   const ora = interactive ? realOra : fakeOra;
 
@@ -137,10 +138,10 @@ export default async (providedOptions = {}) => {
     afterPruneHooks.push(...resolveHooks(forgeConfig.electronPackagerConfig.afterPrune, dir));
   }
 
-  const packageOpts = Object.assign({
+  const packageOpts = {
     asar: false,
     overwrite: true,
-  }, forgeConfig.electronPackagerConfig, {
+    ...forgeConfig.electronPackagerConfig,
     afterCopy: sequentialHooks(afterCopyHooks),
     afterExtract: sequentialHooks(resolveHooks(forgeConfig.electronPackagerConfig.afterExtract, dir)),
     afterPrune: sequentialHooks(afterPruneHooks),
@@ -149,7 +150,7 @@ export default async (providedOptions = {}) => {
     platform,
     out: outDir,
     electronVersion: await getElectronVersion(dir),
-  });
+  };
   packageOpts.quiet = true;
   if (packageOpts.all) {
     throw new Error('electronPackagerConfig.all is not supported by Electron Forge.');

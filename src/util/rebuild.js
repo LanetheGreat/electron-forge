@@ -8,11 +8,12 @@ export default async (buildPath, electronVersion, platform, arch, config = {}) =
   }
 
   await asyncOra('Preparing native dependencies', async (rebuildSpinner) => {
-    const rebuilder = rebuild(Object.assign({}, config, {
+    const rebuilder = rebuild({
+      ...config,
       buildPath,
       electronVersion,
       arch,
-    }));
+    });
     const { lifecycle } = rebuilder;
 
     let found = 0;
