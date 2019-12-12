@@ -25,7 +25,8 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
   });
 
   if (!s3Client.config.credentials || !s3Config.bucket) {
-    throw new Error('In order to publish to s3 you must set the "s3.accessKeyId", "process.env.ELECTRON_FORGE_S3_SECRET_ACCESS_KEY" and "s3.bucket" properties in your forge config. See the docs for more info'); // eslint-disable-line
+    // eslint-disable-next-line max-len
+    throw new Error('In order to publish to s3 you must set the "s3.accessKeyId", "process.env.ELECTRON_FORGE_S3_SECRET_ACCESS_KEY" and "s3.bucket" properties in your forge config. See the docs for more info');
   }
 
   d('creating s3 client with options:', s3Config);
@@ -40,7 +41,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
   let uploaded = 0;
   await asyncOra(`Uploading Artifacts ${uploaded}/${artifacts.length}`, async (uploadSpinner) => {
     const updateSpinner = () => {
-      uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line
+      uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line no-param-reassign
     };
 
     await Promise.all(artifacts.map((artifactPath) => new Promise((resolve, reject) => {

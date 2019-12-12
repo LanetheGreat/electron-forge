@@ -13,12 +13,12 @@ import getForgeConfig from '../util/forge-config';
 import readPackageJSON from '../util/read-package-json';
 
 module.exports = {
-  'import': _import, // eslint-disable-line
+  'import': _import, // eslint-disable-line quote-props
   init,
   install,
   lint,
   make,
-  'package': _package, // eslint-disable-line
+  'package': _package, // eslint-disable-line quote-props
   publish,
   start,
   utils: {

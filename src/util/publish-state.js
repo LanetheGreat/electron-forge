@@ -34,6 +34,7 @@ export default class PublishState {
   static async saveToDirectory(directory, artifacts, rootDir) {
     const id = crypto.createHash('SHA256').update(JSON.stringify(artifacts)).digest('hex');
     for (const artifact of artifacts) {
+      // eslint-disable-next-line no-param-reassign
       artifact.artifacts = artifact.artifacts.map((artifactPath) => path.relative(rootDir, artifactPath));
       const state = new PublishState(path.resolve(directory, id, 'null'), '', false);
       state.setState(artifact);

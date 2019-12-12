@@ -62,7 +62,7 @@ describe('asyncOra', () => {
 
   it('should succeed the ora if the async fn passes', async () => {
     await asyncOra('random text', async () => {
-      if (2 + 2 === 5) console.error('Big brother is at it again'); // eslint-disable-line
+      if (2 + 2 === 5) console.error('Big brother is at it again'); // eslint-disable-line no-constant-condition
     });
     expect(currentOra.succeeded).to.equal(true);
     expect(currentOra.failed).to.equal(false);
@@ -70,7 +70,7 @@ describe('asyncOra', () => {
 
   it('should fail the ora if the async fn throws', async () => {
     await asyncOra('this is gonna end badly', async () => {
-      throw { message: 'Not an error', stack: 'No Stack - Not an error' }; // eslint-disable-line
+      throw { message: 'Not an error', stack: 'No Stack - Not an error' };
     }, () => {});
     expect(currentOra.succeeded).to.equal(false);
     expect(currentOra.failed).to.equal(true);
@@ -79,7 +79,7 @@ describe('asyncOra', () => {
   it('should exit the process with status 1 if the async fn throws', async () => {
     const processExitSpy = sinon.spy();
     await asyncOra('this is dodge', async () => {
-      throw 'woops'; // eslint-disable-line
+      throw 'woops';
     }, processExitSpy);
     expect(processExitSpy.callCount).to.equal(1);
     expect(processExitSpy.firstCall.args).to.deep.equal([1]);
@@ -88,7 +88,7 @@ describe('asyncOra', () => {
   it('should exit the process with status 1 if the async fn throws a number', async () => {
     const processExitSpy = sinon.spy();
     await asyncOra('this is dodge', async () => {
-      throw 42; // eslint-disable-line
+      throw 42;
     }, processExitSpy);
     expect(processExitSpy.callCount).to.equal(1);
     expect(processExitSpy.firstCall.args).to.deep.equal([1]);

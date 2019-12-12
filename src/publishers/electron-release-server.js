@@ -25,7 +25,8 @@ const ersPlatform = (platform, arch) => {
 export default async ({ artifacts, packageJSON, forgeConfig, platform, arch }) => {
   const ersConfig = forgeConfig.electronReleaseServer;
   if (!(ersConfig.baseUrl && ersConfig.username && ersConfig.password)) {
-    throw new Error('In order to publish to ERS you must set the "electronReleaseServer.baseUrl", "electronReleaseServer.username" and "electronReleaseServer.password" properties in your forge config. See the docs for more info'); // eslint-disable-line
+    // eslint-disable-next-line max-len
+    throw new Error('In order to publish to ERS you must set the "electronReleaseServer.baseUrl", "electronReleaseServer.username" and "electronReleaseServer.password" properties in your forge config. See the docs for more info');
   }
 
   d('attempting to authenticate to ERS');

@@ -20,7 +20,8 @@ export default async (buildPath, electronVersion, platform, arch, config = {}) =
     let done = 0;
 
     const redraw = () => {
-      rebuildSpinner.text = `Preparing native dependencies: ${done} / ${found}`; // eslint-disable-line
+      // eslint-disable-next-line no-param-reassign
+      rebuildSpinner.text = `Preparing native dependencies: ${done} / ${found}`;
     };
 
     lifecycle.on('module-found', () => { found += 1; redraw(); });

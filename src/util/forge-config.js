@@ -109,9 +109,9 @@ export default async (dir) => {
       if (typeof obj[objKey] === 'object' && obj !== null) {
         template(obj[objKey]);
       } else if (typeof obj[objKey] === 'string') {
-        obj[objKey] = _template(obj[objKey])(templateObj); // eslint-disable-line
+        obj[objKey] = _template(obj[objKey])(templateObj); // eslint-disable-line no-param-reassign
         if (obj[objKey].startsWith('require:')) {
-          obj[objKey] = require(path.resolve(dir, obj[objKey].substr(8))); // eslint-disable-line
+          obj[objKey] = require(path.resolve(dir, obj[objKey].substr(8))); // eslint-disable-line no-param-reassign
         }
       }
     });

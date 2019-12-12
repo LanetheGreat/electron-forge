@@ -9,7 +9,8 @@ import GitHub from '../util/github';
 export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) => {
   if (!(forgeConfig.github_repository && typeof forgeConfig.github_repository === 'object'
     && forgeConfig.github_repository.owner && forgeConfig.github_repository.name)) {
-    throw new Error('In order to publish to github you must set the "github_repository.owner" and "github_repository.name" properties in your forge config. See the docs for more info'); // eslint-disable-line
+    // eslint-disable-next-line max-len
+    throw new Error('In order to publish to github you must set the "github_repository.owner" and "github_repository.name" properties in your forge config. See the docs for more info');
   }
 
   const github = new GitHub(authToken, true, forgeConfig.github_repository.options);
@@ -46,7 +47,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
   let uploaded = 0;
   await asyncOra(`Uploading Artifacts ${uploaded}/${artifacts.length}`, async (uploadSpinner) => {
     const updateSpinner = () => {
-      uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line
+      uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line no-param-reassign
     };
 
     await Promise.all(artifacts.map(async (artifactPath) => (async () => {
