@@ -3,7 +3,7 @@ import path from 'path';
 import program from 'commander';
 
 import './util/terminate';
-import { make } from './api';
+import make from './api/make';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getMakeOptions = () => {

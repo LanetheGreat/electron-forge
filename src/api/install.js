@@ -91,10 +91,7 @@ export default async (providedOptions = {}) => {
 
     possibleAssets = assets.filter((asset) => {
       const targetSuffixes = installTargets[process.platform];
-      for (const suffix of targetSuffixes) {
-        if (suffix.test(asset.name)) return true;
-      }
-      return false;
+      return targetSuffixes.some((suffix) => suffix.test(asset.name));
     });
 
     if (possibleAssets.length === 0) {

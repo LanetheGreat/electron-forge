@@ -2,7 +2,7 @@ import path from 'path';
 import program from 'commander';
 
 import './util/terminate';
-import { init } from './api';
+import init from './api/init';
 
 (async () => {
   let dir = process.cwd();

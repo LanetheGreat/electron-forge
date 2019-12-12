@@ -3,7 +3,7 @@ import path from 'path';
 import program from 'commander';
 
 import './util/terminate';
-import { lint } from './api';
+import lint from './api/lint';
 
 (async () => {
   let dir = process.cwd();

@@ -150,9 +150,7 @@ describe('publish', () => {
           target: [],
           dryRun: true,
         });
-        for (const backedUp of await fs.readdir(backupDir)) {
-          await fs.copy(path.resolve(backupDir, backedUp), path.resolve(dryPath, backedUp));
-        }
+        await Promise.all((await fs.readdir(backupDir)).map((backedUp) => fs.copy(path.resolve(backupDir, backedUp), path.resolve(dryPath, backedUp))));
       });
 
       it('should create dry run hash JSON files', async () => {

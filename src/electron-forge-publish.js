@@ -3,7 +3,7 @@ import path from 'path';
 import program from 'commander';
 
 import './util/terminate';
-import { publish } from './api';
+import publish from './api/publish';
 import { getMakeOptions } from './electron-forge-make';
 
 (async () => {

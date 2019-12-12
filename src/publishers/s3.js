@@ -43,7 +43,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
       uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line
     };
 
-    await Promise.all(artifacts.map((artifactPath) => new Promise(async (resolve, reject) => {
+    await Promise.all(artifacts.map((artifactPath) => new Promise((resolve, reject) => {
       const done = (err) => {
         if (err) return reject(err);
         uploaded += 1;

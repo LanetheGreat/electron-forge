@@ -10,7 +10,7 @@ export const getMountedImages = async () => {
 
   const mountObjects = [];
 
-  for (const mount of mounts) {
+  mounts.forEach((mount) => {
     try {
       const mountPath = /\/Volumes\/(.+)\n/g.exec(mount)[1];
       const imagePath = /image-path +: +(.+)\n/g.exec(mount)[1];
@@ -18,7 +18,7 @@ export const getMountedImages = async () => {
     } catch (err) {
       // Ignore
     }
-  }
+  });
 
   d('identified active mounts', mountObjects);
   return mountObjects;

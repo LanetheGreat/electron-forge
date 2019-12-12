@@ -106,9 +106,7 @@ export default async (providedOptions = {}) => {
       }
       await fs.remove(path.resolve(buildPath, 'node_modules/@lanethegreat/electron-compile/test'));
       const bins = await pify(glob)(path.join(buildPath, '**/.bin/**/*'));
-      for (const bin of bins) {
-        await fs.remove(bin);
-      }
+      await Promise.all(bins.map(fs.remove));
       done();
     }, async (...args) => {
       prepareSpinner.succeed();

@@ -47,12 +47,11 @@ export default async (dir, template, lintStyle) => {
       }
 
       const files = glob.sync(path.resolve(tmplPath, '**/*'));
-
-      for (const file of files) {
+      await Promise.all(files.map(async (file) => {
         if ((await fs.stat(file)).isFile()) {
           await copy(file, path.resolve(dir, path.relative(tmplPath, file).replace(/^_/, '.')));
         }
-      }
+      }));
     }
   });
 

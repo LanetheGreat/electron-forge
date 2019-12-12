@@ -49,15 +49,8 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
       uploadSpinner.text = `Uploading Artifacts ${uploaded}/${artifacts.length}`; // eslint-disable-line
     };
 
-    await Promise.all(artifacts.map((artifactPath) => new Promise(async (resolve) => {
-      const done = () => {
-        uploaded += 1;
-        updateSpinner();
-        resolve();
-      };
-      if (release.assets.find((asset) => asset.name === path.basename(artifactPath))) {
-        return done();
-      }
+    await Promise.all(artifacts.map(async (artifactPath) => (async () => {
+      if (release.assets.find((asset) => asset.name === path.basename(artifactPath))) return;
       await github.getGitHub().repos.uploadAsset({
         url: release.upload_url,
         file: fs.createReadStream(artifactPath),
@@ -65,7 +58,9 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
         contentLength: (await fs.stat(artifactPath)).size,
         name: path.basename(artifactPath),
       });
-      return done();
+    })().then(() => {
+      uploaded += 1;
+      updateSpinner();
     })));
   });
 };

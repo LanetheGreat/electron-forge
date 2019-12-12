@@ -376,13 +376,8 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
       };
 
       const targetOptionFetcher = () => ({ dir, skipPackage: true });
-      for (const maker of goodMakers) {
-        testMakeTarget(maker, true, targetOptionFetcher);
-      }
-
-      for (const maker of badMakers) {
-        testMakeTarget(maker, false, targetOptionFetcher);
-      }
+      goodMakers.forEach((maker) => testMakeTarget(maker, true, targetOptionFetcher));
+      badMakers.forEach((maker) => testMakeTarget(maker, false, targetOptionFetcher));
 
       describe('make', () => {
         it('throws an error when given an unrecognized platform', async () => {

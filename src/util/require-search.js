@@ -7,15 +7,18 @@ export function requireSearchRaw(relativeTo, paths) {
   const testPaths = paths
     .concat(paths.map((mapPath) => path.resolve(relativeTo, mapPath)))
     .concat(paths.map((mapPath) => path.resolve(relativeTo, 'node_modules', mapPath)));
+
   d('searching', testPaths, 'relative to', relativeTo);
-  for (const testPath of testPaths) {
+  const foundPath = testPaths.find((testPath) => {
     try {
       d('testing', testPath);
       return require(testPath);
     } catch (err) {
-      // Ignore the error
+      return false;
     }
-  }
+  });
+  if (foundPath) return require(foundPath);
+
   d('failed to find a module in', testPaths);
 }
 

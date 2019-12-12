@@ -46,7 +46,7 @@ export async function createDefaultCertificate(publisherName, { certFilePath, ce
     throw new Error(`Received invalid publisher name: '${publisherName}' did not conform to X.500 distinguished name syntax for MakeCert.`);
   }
 
-  return await makeCert(makeCertOptions);
+  return makeCert(makeCertOptions);
 }
 
 function getDistinguishedNameFromAuthor(author) {

@@ -3,7 +3,7 @@ import path from 'path';
 import program from 'commander';
 
 import './util/terminate';
-import { start } from './api';
+import start from './api/start';
 
 (async () => {
   let commandArgs = process.argv;

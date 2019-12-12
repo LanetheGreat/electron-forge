@@ -1,3 +1,3 @@
 import opn from 'opn';
 
-export default async (filePath) => await opn(filePath, { wait: false });
+export default async (filePath) => opn(filePath, { wait: false });

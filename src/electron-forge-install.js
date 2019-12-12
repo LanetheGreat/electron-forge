@@ -1,7 +1,7 @@
 import program from 'commander';
 
 import './util/terminate';
-import { install } from './api';
+import install from './api/install';
 
 (async () => {
   let repo;

@@ -22,11 +22,7 @@ export default async (dir, { lintStyle, copyCIFiles }) => {
     if (lintStyle === 'airbnb') rootFiles.push('_eslintrc');
     const srcFiles = ['index.js', 'index.html'];
 
-    for (const file of rootFiles) {
-      await copy(path.resolve(tmplPath, file), path.resolve(dir, file.replace(/^_/, '.')));
-    }
-    for (const file of srcFiles) {
-      await copy(path.resolve(tmplPath, file), path.resolve(dir, 'src', file));
-    }
+    await Promise.all(rootFiles.map((file) => copy(path.resolve(tmplPath, file), path.resolve(dir, file.replace(/^_/, '.')))));
+    await Promise.all(srcFiles.map((file) => copy(path.resolve(tmplPath, file), path.resolve(dir, 'src', file))));
   });
 };
