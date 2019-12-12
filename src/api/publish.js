@@ -51,10 +51,10 @@ const publish = async (providedOptions = {}) => {
   asyncOra.interactive = interactive;
 
   if (dryRun && dryRunResume) {
-    throw 'Can\'t dry run and resume a dry run at the same time';
+    throw new Error('Can\'t dry run and resume a dry run at the same time');
   }
   if (dryRunResume && makeResults) {
-    throw 'Can\'t resume a dry run and use the provided makeResults at the same time';
+    throw new Error('Can\'t resume a dry run and use the provided makeResults at the same time');
   }
 
   let packageJSON = await readPackageJSON(dir);
@@ -116,7 +116,7 @@ const publish = async (providedOptions = {}) => {
 
   dir = await resolveDir(dir);
   if (!dir) {
-    throw 'Failed to locate publishable Electron application';
+    throw new Error('Failed to locate publishable Electron application');
   }
 
   const artifacts = makeResults.reduce((accum, makeResult) => {

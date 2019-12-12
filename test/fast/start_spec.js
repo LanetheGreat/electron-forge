@@ -176,12 +176,10 @@ describe('start', () => {
     it('should remove all "~" from args when in VSCode debug mode', (done) => {
       process.argv = [argv[0], '--vscode', '--', '--foo', 'bar', 'this arg exists'];
       proxyquire.noCallThru().load('../../src/electron-forge-start', {
-        './api': {
-          start: (startOptions) => {
-            expect(startOptions.args).to.deep.equal(['--foo', 'bar', 'this arg exists']);
-            done();
-            return Promise.resolve(childStub);
-          },
+        './api/start': (startOptions) => {
+          expect(startOptions.args).to.deep.equal(['--foo', 'bar', 'this arg exists']);
+          done();
+          return Promise.resolve(childStub);
         },
       });
     });

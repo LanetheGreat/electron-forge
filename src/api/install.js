@@ -50,7 +50,7 @@ export default async (providedOptions = {}) => {
 
   await asyncOra('Searching for Application', async (searchSpinner) => {
     if (!repo || repo.indexOf('/') === -1) {
-      throw 'Invalid repository name, must be in the format owner/name';
+      throw new Error('Invalid repository name, must be in the format owner/name');
     }
 
     d('searching for repo:', repo);
@@ -80,7 +80,7 @@ export default async (providedOptions = {}) => {
 
     const { assets } = latestRelease;
     if (!assets || !Array.isArray(assets)) {
-      throw 'Could not find any assets for the latest release';
+      throw new Error('Could not find any assets for the latest release');
     }
 
     const installTargets = {
@@ -119,7 +119,7 @@ export default async (providedOptions = {}) => {
 
       targetAsset = possibleAssets.find((asset) => asset.id === assetID);
     } else {
-      throw 'expected a chooseAsset function to be provided but it was not';
+      throw new Error('expected a chooseAsset function to be provided but it was not');
     }
   }
 

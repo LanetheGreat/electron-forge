@@ -12,7 +12,7 @@ export default async ({ dir, artifacts, forgeConfig }) => {
   const snapArtifacts = artifacts.filter((artifact) => artifact.endsWith('.snap'));
 
   if (snapArtifacts.length === 0) {
-    throw 'No snap files to upload. Please ensure that "snap" is listed in the "make_targets" in Forge config.';
+    throw new Error('No snap files to upload. Please ensure that "snap" is listed in the "make_targets" in Forge config.');
   }
 
   const snapcraftCfgPath = path.join(dir, '.snapcraft', 'snapcraft.cfg');

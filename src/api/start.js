@@ -42,7 +42,7 @@ export default async (providedOptions = {}) => {
   await asyncOra('Locating Application', async () => {
     dir = await resolveDir(dir);
     if (!dir) {
-      throw 'Failed to locate startable Electron application';
+      throw new Error('Failed to locate startable Electron application');
     }
   });
 

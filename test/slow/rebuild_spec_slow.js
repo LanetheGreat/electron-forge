@@ -51,8 +51,8 @@ describe('rebuilder', () => {
     });
 
     it('should not have rebuilt top level devDependencies', async () => {
-      const forgeMeta = path.resolve(testModulePath, 'node_modules', 'ffi', 'build', 'Release', '.forge-meta');
-      expect(await fs.pathExists(forgeMeta), 'ffi build meta should not exist').to.equal(false);
+      const forgeMeta = path.resolve(testModulePath, 'node_modules', 'ffi-napi', 'build', 'Release', '.forge-meta');
+      expect(await fs.pathExists(forgeMeta), 'ffi-napi build meta should not exist').to.equal(false);
     });
   });
 

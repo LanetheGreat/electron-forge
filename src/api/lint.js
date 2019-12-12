@@ -37,7 +37,7 @@ export default async (providedOptions = {}) => {
   await asyncOra('Linting Application', async (lintSpinner) => {
     dir = await resolveDir(dir);
     if (!dir) {
-      throw 'Failed to locate lintable Electron application';
+      throw new Error('Failed to locate lintable Electron application');
     }
 
     d('executing "run lint" in dir:', dir);

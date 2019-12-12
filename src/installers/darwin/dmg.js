@@ -17,7 +17,7 @@ export default async (filePath, installSpinner) => {
     const volumePath = path.resolve('/Volumes', targetMount.mountPath);
     const appName = (await fs.readdir(volumePath)).find((file) => file.endsWith('.app'));
     if (!appName) {
-      throw 'Failed to find .app file in DMG';
+      throw new Error('Failed to find .app file in DMG');
     }
     const appPath = path.resolve(volumePath, appName);
     const targetApplicationPath = `/Applications/${path.basename(appPath)}`;

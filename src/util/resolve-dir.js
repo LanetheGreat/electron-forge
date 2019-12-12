@@ -22,7 +22,7 @@ export default async (dir) => {
           throw `You must depend on an EXACT version of "@lanethegreat/electron-prebuilt-compile" not a range (got "${version}")`;
         }
       } else {
-        throw 'You must depend on "@lanethegreat/electron-prebuilt-compile" in your devDependencies';
+        throw new Error('You must depend on "@lanethegreat/electron-prebuilt-compile" in your devDependencies');
       }
 
       if (packageJSON.config && packageJSON.config.forge) {

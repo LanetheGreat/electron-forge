@@ -27,7 +27,7 @@ describe('electron-forge start', () => {
       process.argv = ['node', 'electron-forge-start'].concat(args);
       return proxyquire.noCallThru().load('../../src/electron-forge-start', {
         commander: new Command(),
-        './api': { start: startStub },
+        './api/start': startStub,
       });
     };
   });

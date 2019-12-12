@@ -75,14 +75,14 @@ export default async (providedOptions = {}) => {
 
   dir = await resolveDir(dir);
   if (!dir) {
-    throw 'Failed to locate compilable Electron application';
+    throw new Error('Failed to locate compilable Electron application');
   }
 
   const packageJSON = await readPackageJSON(dir);
 
   if (path.dirname(require.resolve(path.resolve(dir, packageJSON.main))) === dir) {
     console.error(`Entry point: ${packageJSON.main}`.red);
-    throw 'The entry point to your application ("packageJSON.main") must be in a subfolder not in the top level directory';
+    throw new Error('The entry point to your application ("packageJSON.main") must be in a subfolder not in the top level directory');
   }
 
   const forgeConfig = await getForgeConfig(dir);

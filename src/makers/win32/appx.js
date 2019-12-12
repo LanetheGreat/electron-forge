@@ -76,7 +76,7 @@ export default async ({ dir, appName, targetArch, forgeConfig, packageJSON }) =>
   };
 
   if (!opts.publisher) {
-    throw 'Please set config.forge.windowsStoreConfig.publisher or author.name in package.json for the appx target';
+    throw new Error('Please set config.forge.windowsStoreConfig.publisher or author.name in package.json for the appx target');
   }
 
   if (!opts.devCert) {

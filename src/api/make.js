@@ -58,7 +58,7 @@ export default async (providedOptions = {}) => {
   await asyncOra('Resolving Forge Config', async () => {
     dir = await resolveDir(dir);
     if (!dir) {
-      throw 'Failed to locate makeable Electron application';
+      throw new Error('Failed to locate makeable Electron application');
     }
 
     forgeConfig = await getForgeConfig(dir);

@@ -21,7 +21,7 @@ export default async (appPath, targetApplicationPath, spinner, copyInstead = fal
       message: `The application "${path.basename(targetApplicationPath)}" appears to already exist in /Applications. Do you want to replace it?`,
     });
     if (!confirm) {
-      throw 'Installation stopped by user';
+      throw new Error('Installation stopped by user');
     } else {
       spinner.start();
       await fs.remove(targetApplicationPath);

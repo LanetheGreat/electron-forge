@@ -21,8 +21,13 @@ export const devDeps = [
 ];
 export const exactDevDeps = ['@lanethegreat/electron-prebuilt-compile'];
 export const standardDeps = ['standard'];
-export const airbnbDeps = ['eslint@^3', 'eslint-config-airbnb@^15', 'eslint-plugin-import@^2',
-  'eslint-plugin-jsx-a11y@^5', 'eslint-plugin-react@^7'];
+export const airbnbDeps = [
+  'eslint@^6',
+  'eslint-config-airbnb@^18',
+  'eslint-plugin-import@^2',
+  'eslint-plugin-jsx-a11y@^6',
+  'eslint-plugin-react@^7',
+];
 
 export default async (dir, lintStyle) => {
   await asyncOra('Initializing NPM Module', async () => {

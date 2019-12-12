@@ -25,7 +25,7 @@ export default async ({ artifacts, packageJSON, forgeConfig, authToken, tag }) =
   });
 
   if (!s3Client.config.credentials || !s3Config.bucket) {
-    throw 'In order to publish to s3 you must set the "s3.accessKeyId", "process.env.ELECTRON_FORGE_S3_SECRET_ACCESS_KEY" and "s3.bucket" properties in your forge config. See the docs for more info'; // eslint-disable-line
+    throw new Error('In order to publish to s3 you must set the "s3.accessKeyId", "process.env.ELECTRON_FORGE_S3_SECRET_ACCESS_KEY" and "s3.bucket" properties in your forge config. See the docs for more info'); // eslint-disable-line
   }
 
   d('creating s3 client with options:', s3Config);

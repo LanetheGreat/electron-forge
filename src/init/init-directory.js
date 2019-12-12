@@ -18,7 +18,7 @@ export default async (dir, interactive) => {
       initSpinner.stop(logSymbols.warning);
       const confirm = await confirmIfInteractive(interactive, `WARNING: The specified path: "${dir}" is not empty, do you wish to continue?`);
       if (!confirm) {
-        throw 'Cancelled by user'; // eslint-disable-line
+        throw new Error('Cancelled by user');
       }
     }
   });
