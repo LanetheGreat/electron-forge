@@ -3,13 +3,14 @@ import path from 'path';
 
 import asyncOra from './ora-handler';
 import readPackageJSON from './read-package-json';
+import { promiseSequence } from './promise-sequence';
 
 export default async (originalDir, buildPath, electronVersion, pPlatform, pArch, done) => {
   await asyncOra('Compiling Application', async () => {
     const compileCLI = require(path.resolve(originalDir, 'node_modules/@lanethegreat/electron-compile/lib/cli.js'));
 
     async function compileAndShim(appDir) {
-      for (const entry of await fs.readdir(appDir)) {
+      await promiseSequence(await fs.readdir(appDir), async (entry) => {
         if (!entry.match(/^(node_modules|bower_components)$/)) {
           const fullPath = path.join(appDir, entry);
 
@@ -20,7 +21,7 @@ export default async (originalDir, buildPath, electronVersion, pPlatform, pArch,
             console.log = log;
           }
         }
-      }
+      })();
 
       const packageJSON = await readPackageJSON(appDir);
 

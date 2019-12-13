@@ -13,13 +13,13 @@ export default async (dir) => {
     prevDir = mDir;
     const testPath = path.resolve(mDir, 'package.json');
     d('searching for project in:', mDir);
-    if (await fs.pathExists(testPath)) {
-      const packageJSON = await readPackageJSON(mDir);
+    if (await fs.pathExists(testPath)) { // eslint-disable-line no-await-in-loop
+      const packageJSON = await readPackageJSON(mDir); // eslint-disable-line no-await-in-loop
 
       if (packageJSON.devDependencies && packageJSON.devDependencies['@lanethegreat/electron-prebuilt-compile']) {
         const version = packageJSON.devDependencies['@lanethegreat/electron-prebuilt-compile'];
         if (!isExactVersion(version)) {
-          throw `You must depend on an EXACT version of "@lanethegreat/electron-prebuilt-compile" not a range (got "${version}")`;
+          throw new Error(`You must depend on an EXACT version of "@lanethegreat/electron-prebuilt-compile" not a range (got "${version}")`);
         }
       } else {
         throw new Error('You must depend on "@lanethegreat/electron-prebuilt-compile" in your devDependencies');

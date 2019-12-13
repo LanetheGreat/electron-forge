@@ -62,7 +62,7 @@ export default async (providedOptions = {}) => {
     }
 
     if (!releases || releases.message === 'Not Found' || !Array.isArray(releases)) {
-      throw `Failed to find releases for repository "${repo}".  Please check the name and try again.`;
+      throw new Error(`Failed to find releases for repository "${repo}".  Please check the name and try again.`);
     }
 
     releases = releases.filter((release) => !release.prerelease || prerelease);
@@ -95,7 +95,7 @@ export default async (providedOptions = {}) => {
     });
 
     if (possibleAssets.length === 0) {
-      throw `Failed to find any installable assets for target platform: ${`${process.platform}`.cyan}`;
+      throw new Error(`Failed to find any installable assets for target platform: ${`${process.platform}`.cyan}`);
     }
   });
 

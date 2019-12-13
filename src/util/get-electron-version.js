@@ -8,10 +8,11 @@ export default async (projectDir) => {
   let result = null;
 
   const modulesToExamine = ['@lanethegreat/electron-prebuilt-compile', 'electron', 'electron-prebuilt'];
+  // eslint-disable-next-line no-restricted-syntax
   for (const moduleName of modulesToExamine) {
     const moduleDir = path.join(projectDir, 'node_modules', moduleName);
     try {
-      const packageJSON = await readPackageJSON(moduleDir);
+      const packageJSON = await readPackageJSON(moduleDir); // eslint-disable-line no-await-in-loop
       result = packageJSON.version;
       break;
     } catch (e) {

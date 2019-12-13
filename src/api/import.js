@@ -13,6 +13,7 @@ import installDepList from '../util/install-dependencies';
 import readPackageJSON from '../util/read-package-json';
 import confirmIfInteractive from '../util/confirm-if-interactive';
 import { yarnOrNpmSpawn, hasYarn } from '../util/yarn-or-npm';
+import { promiseSequence } from '../util/promise-sequence';
 
 const d = debug('@lanethegreat/electron-forge:import');
 
@@ -47,7 +48,7 @@ export default async (providedOptions = {}) => {
 
   d(`Attempting to import project in: ${dir}`);
   if (!await fs.pathExists(dir) || !await fs.pathExists(path.resolve(dir, 'package.json'))) {
-    throw `We couldn't find a project in: ${dir}`;
+    throw new Error(`We couldn't find a project in: ${dir}`);
   }
 
   // eslint-disable-next-line max-len
@@ -98,7 +99,7 @@ export default async (providedOptions = {}) => {
   };
 
   let electronName;
-  for (const key of keys) {
+  await promiseSequence(keys, async (key) => {
     if (key === 'electron' || key === 'electron-prebuilt') {
       delete packageJSON.dependencies[key];
       delete packageJSON.devDependencies[key];
@@ -113,7 +114,7 @@ export default async (providedOptions = {}) => {
         delete packageJSON.devDependencies[key];
       }
     }
-  }
+  })();
 
   packageJSON.scripts = packageJSON.scripts || {};
   d('reading current scripts object:', packageJSON.scripts);

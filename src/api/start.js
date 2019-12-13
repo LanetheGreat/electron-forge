@@ -49,7 +49,7 @@ export default async (providedOptions = {}) => {
   const packageJSON = await readPackageJSON(dir);
 
   if (!packageJSON.version) {
-    throw `Please set your application's 'version' in '${dir}/package.json'.`;
+    throw new Error(`Please set your application's 'version' in '${dir}/package.json'.`);
   }
 
   const forgeConfig = await getForgeConfig(dir);

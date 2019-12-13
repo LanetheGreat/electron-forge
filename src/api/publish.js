@@ -10,6 +10,7 @@ import requireSearch from '../util/require-search';
 import resolveDir from '../util/resolve-dir';
 import PublishState from '../util/publish-state';
 import getCurrentOutDir from '../util/out-dir';
+import { promiseSequence } from '../util/promise-sequence';
 
 import make from './make';
 
@@ -66,7 +67,7 @@ const publish = async (providedOptions = {}) => {
   if (dryRunResume) {
     d('attempting to resume from dry run');
     const publishes = await PublishState.loadFromDirectory(dryRunDir, dir);
-    for (const publishStates of publishes) {
+    await promiseSequence(publishes, async (publishStates) => {
       d('publishing for given state set');
       await publish({
         dir,
@@ -79,7 +80,7 @@ const publish = async (providedOptions = {}) => {
         dryRunResume: false,
         makeResults: publishStates.map(({ state }) => state),
       });
-    }
+    })();
     return;
   }
 
@@ -94,17 +95,17 @@ const publish = async (providedOptions = {}) => {
     // Restore values from dry run
     d('restoring publish settings from dry run');
 
-    for (const makeResult of makeResults) {
+    await promiseSequence(makeResults, async (makeResult) => {
       packageJSON = makeResult.packageJSON;
       makeOptions.platform = makeResult.platform;
       makeOptions.arch = makeResult.arch;
 
-      for (const makePath of makeResult.artifacts) {
+      await promiseSequence(makeResult.artifacts, async (makePath) => {
         if (!await fs.exists(makePath)) {
-          throw `Attempted to resume a dry run but an artifact (${makePath}) could not be found`;
+          throw new Error(`Attempted to resume a dry run but an artifact (${makePath}) could not be found`);
         }
-      }
-    }
+      })();
+    })();
   }
 
   if (dryRun) {
@@ -128,7 +129,8 @@ const publish = async (providedOptions = {}) => {
     publishTargets = forgeConfig.publish_targets[makeOptions.platform || process.platform];
   }
 
-  for (const publishTarget of publishTargets) {
+  await promiseSequence(publishTargets, async (publishTarget) => {
+    d(`Publishing for target: ${publishTarget}`);
     let publisher;
     await asyncOra(`Resolving publish target: ${`${publishTarget}`.cyan}`, async () => { // eslint-disable-line no-loop-func
       publisher = requireSearch(__dirname, [
@@ -139,7 +141,7 @@ const publish = async (providedOptions = {}) => {
         path.resolve(dir, 'node_modules', publishTarget),
       ]);
       if (!publisher) {
-        throw `Could not find a publish target with the name: ${publishTarget}`;
+        throw new Error(`Could not find a publish target with the name: ${publishTarget}`);
       }
     });
 
@@ -153,7 +155,7 @@ const publish = async (providedOptions = {}) => {
       platform: makeOptions.platform || process.platform,
       arch: makeOptions.arch || process.arch,
     });
-  }
+  })();
 };
 
 export default publish;

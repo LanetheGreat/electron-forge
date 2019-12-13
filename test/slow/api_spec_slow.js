@@ -12,6 +12,7 @@ import { createDefaultCertificate } from '../../src/makers/win32/appx';
 import installDeps from '../../src/util/install-dependencies';
 import readPackageJSON from '../../src/util/read-package-json';
 import yarnOrNpm from '../../src/util/yarn-or-npm';
+import { promiseSequence } from '../../src/util/promise-sequence';
 
 const nodeInstallerArg = process.argv.find((arg) => arg.startsWith('--installer=')) || `--installer=${yarnOrNpm()}`;
 const nodeInstaller = nodeInstallerArg.substr(12);
@@ -356,22 +357,22 @@ describe(`electron-forge API (with installer=${nodeInstaller})`, () => {
             await fs.writeFile(path.resolve(dir, 'package.json'), JSON.stringify(packageJSON));
           });
 
-          for (const optionsFetcher of options) {
+          await Promise.all(options.map(async (optionsFetcher) => {
             if (shouldPass) {
               it(`successfully makes for config: ${JSON.stringify(optionsFetcher(), 2)}`, async () => {
                 const outputs = await forge.make(optionsFetcher());
-                for (const outputResult of outputs) {
-                  for (const output of outputResult.artifacts) {
+                await promiseSequence(outputs, async (outputResult) => {
+                  await promiseSequence(outputResult.artifacts, async (output) => {
                     expect(await fs.exists(output)).to.equal(true);
-                  }
-                }
+                  })();
+                })();
               });
             } else {
               it(`fails for config: ${JSON.stringify(optionsFetcher(), 2)}`, async () => {
                 await expect(forge.make(optionsFetcher())).to.eventually.be.rejected;
               });
             }
-          }
+          }));
         });
       };
 

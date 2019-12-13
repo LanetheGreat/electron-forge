@@ -7,6 +7,7 @@ import { setInitialForgeConfig } from '../util/forge-config';
 import installDepList from '../util/install-dependencies';
 import readPackageJSON from '../util/read-package-json';
 import asyncOra from '../util/ora-handler';
+import { promiseSequence } from '../util/promise-sequence';
 
 const d = debug('@lanethegreat/electron-forge:init:npm');
 
@@ -60,9 +61,9 @@ export default async (dir, lintStyle) => {
     await installDepList(dir, devDeps, true);
 
     d('installing exact dependencies');
-    for (const packageName of exactDevDeps) {
+    await promiseSequence(exactDevDeps, async (packageName) => {
       await installDepList(dir, [packageName], true, true);
-    }
+    })();
 
     switch (lintStyle) {
       case 'standard':
@@ -85,13 +86,13 @@ export default async (dir, lintStyle) => {
       path.join(dir, 'node_modules', '@lanethegreat', 'electron-prebuilt-compile', 'package.json'),
     );
 
-    for (const profile of ['development', 'production']) {
+    ['development', 'production'].forEach((profile) => {
       const envTarget = content.env[profile]['application/javascript'].presets.find((x) => x[0] === 'env');
       // parseFloat strips the patch version
       // parseFloat('1.3.2') === 1.3
       // Note: This won't work if the minor version ever gets higher than 9
       envTarget[1].targets.electron = parseFloat(electronPrebuilt.version).toFixed(1).toString();
-    }
+    });
 
     await fs.writeJson(path.join(dir, '.compilerc'), content, { spaces: 2 });
   });

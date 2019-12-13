@@ -13,6 +13,7 @@ import readPackageJSON from '../util/read-package-json';
 import { requireSearchRaw } from '../util/require-search';
 import resolveDir from '../util/resolve-dir';
 import getCurrentOutDir from '../util/out-dir';
+import { promiseSequence } from '../util/promise-sequence';
 
 import packager from './package';
 
@@ -75,7 +76,7 @@ export default async (providedOptions = {}) => {
   const makers = {};
   const targets = overrideTargets || forgeConfig.make_targets[platform];
 
-  for (const target of targets) {
+  await promiseSequence(targets, async (target) => {
     const maker = requireSearchRaw(__dirname, [
       `../makers/${platform}/${target}.js`,
       `../makers/generic/${target}.js`,
@@ -108,7 +109,7 @@ export default async (providedOptions = {}) => {
     }
 
     makers[target] = maker.default || maker;
-  }
+  })();
 
   if (!skipPackage) {
     info(interactive, 'We need to package your application before we can make it'.green);
@@ -132,13 +133,13 @@ export default async (providedOptions = {}) => {
   await runHook(forgeConfig, 'preMake');
 
   const electronVersion = await getElectronVersion(dir);
-  for (const targetArch of parseArchs(platform, arch, electronVersion)) {
+  await promiseSequence(parseArchs(platform, arch, electronVersion), async (targetArch) => {
     const packageDir = path.resolve(outDir, `${appName}-${actualTargetPlatform}-${targetArch}`);
     if (!(await fs.pathExists(packageDir))) {
       throw new Error(`Couldn't find packaged app at: ${packageDir}`);
     }
 
-    for (const target of targets) {
+    await promiseSequence(targets, async (target) => {
       const maker = makers[target];
 
       // eslint-disable-next-line no-loop-func
@@ -170,8 +171,8 @@ export default async (providedOptions = {}) => {
           }
         }
       });
-    }
-  }
+    })();
+  })();
 
   const result = await runHook(forgeConfig, 'postMake', outputs);
   // If the postMake hooks modifies the locations / names of the outputs it must return

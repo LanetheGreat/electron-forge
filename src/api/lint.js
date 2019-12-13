@@ -54,6 +54,6 @@ export default async (providedOptions = {}) => {
   });
 
   if (!success) {
-    throw result;
+    throw new Error(result);
   }
 };

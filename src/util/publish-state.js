@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs-extra';
 import path from 'path';
+import { promiseSequence } from './promise-sequence';
 
 const EXTENSION = '.forge.publish';
 
@@ -11,7 +12,7 @@ export default class PublishState {
     }
 
     const publishes = [];
-    for (const dirName of await fs.readdir(directory)) {
+    await promiseSequence(await fs.readdir(directory), async (dirName) => {
       const subDir = path.resolve(directory, dirName);
       const states = [];
       if ((await fs.stat(subDir)).isDirectory()) {
@@ -19,27 +20,27 @@ export default class PublishState {
           .filter((fileName) => fileName.endsWith(EXTENSION))
           .map((fileName) => path.resolve(subDir, fileName));
 
-        for (const filePath of filePaths) {
+        await promiseSequence(filePaths, async (filePath) => {
           const state = new PublishState(filePath);
           await state.load();
           state.state.artifacts = state.state.artifacts.map((artifactPath) => path.resolve(rootDir, artifactPath));
           states.push(state);
-        }
+        })();
       }
       publishes.push(states);
-    }
+    })();
     return publishes;
   }
 
   static async saveToDirectory(directory, artifacts, rootDir) {
     const id = crypto.createHash('SHA256').update(JSON.stringify(artifacts)).digest('hex');
-    for (const artifact of artifacts) {
+    await promiseSequence(artifacts, async (artifact) => {
       // eslint-disable-next-line no-param-reassign
       artifact.artifacts = artifact.artifacts.map((artifactPath) => path.relative(rootDir, artifactPath));
       const state = new PublishState(path.resolve(directory, id, 'null'), '', false);
       state.setState(artifact);
       await state.saveToDisk();
-    }
+    })();
   }
 
   constructor(filePath, hasHash = true) {

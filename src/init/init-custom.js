@@ -22,7 +22,7 @@ export default async (dir, template, lintStyle) => {
         templateModulePath = require.resolve(`electron-forge-template-${template}`);
         d('using local template');
       } catch (err2) {
-        throw `Failed to locate custom template: "${template}"\n\nTry \`npm install -g electron-forge-template-${template}\``;
+        throw new Error(`Failed to locate custom template: "${template}"\n\nTry \`npm install -g electron-forge-template-${template}\``);
       }
     }
   });
@@ -43,7 +43,7 @@ export default async (dir, template, lintStyle) => {
     if (templateDirectory) {
       const tmplPath = templateDirectory;
       if (!path.isAbsolute(templateDirectory)) {
-        throw `Custom template path needs to be absolute, this is an issue with "electron-forge-template-${template}"`;
+        throw new Error(`Custom template path needs to be absolute, this is an issue with "electron-forge-template-${template}"`);
       }
 
       const files = glob.sync(path.resolve(tmplPath, '**/*'));

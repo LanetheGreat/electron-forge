@@ -5,6 +5,7 @@ import os from 'os';
 import path from 'path';
 import proxyquire from 'proxyquire';
 import sinon from 'sinon';
+import { promiseSequence } from '../../src/util/promise-sequence';
 
 chai.use(chaiAsPromised);
 
@@ -160,11 +161,12 @@ describe('publish', () => {
 
         const hashFolders = await fs.readdir(dryRunFolder);
         expect(hashFolders).to.have.length(2, 'Should contain two hashes (two publishes)');
-        for (const hashFolderName of hashFolders) {
+
+        await promiseSequence(hashFolders, async (hashFolderName) => {
           const hashFolder = path.resolve(dryRunFolder, hashFolderName);
           const makes = await fs.readdir(hashFolder);
           expect(makes).to.have.length(3, 'Should contain the results of three makes');
-          for (const makeJson of makes) {
+          await promiseSequence(makes, async (makeJson) => {
             const jsonPath = path.resolve(hashFolder, makeJson);
             const contents = await fs.readFile(jsonPath, 'utf8');
             expect(() => JSON.parse(contents), 'Should be valid JSON').to.not.throw();
@@ -175,12 +177,12 @@ describe('publish', () => {
             expect(data).to.have.property('packageJSON');
 
             // Make the artifacts for later
-            for (const artifactPath of data.artifacts) {
+            await promiseSequence(data.artifacts, async (artifactPath) => {
               await fs.mkdirp(path.dirname(path.resolve(dir, artifactPath)));
               await fs.writeFile(path.resolve(dir, artifactPath), artifactPath);
-            }
-          }
-        }
+            })();
+          })();
+        })();
       });
     });
 

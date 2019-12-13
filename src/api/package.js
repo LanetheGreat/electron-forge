@@ -18,6 +18,7 @@ import rebuildHook from '../util/rebuild';
 import requireSearch from '../util/require-search';
 import resolveDir from '../util/resolve-dir';
 import getCurrentOutDir from '../util/out-dir';
+import { promiseSequence } from '../util/promise-sequence';
 
 const d = debug('@lanethegreat/electron-forge:packager');
 
@@ -45,9 +46,9 @@ function sequentialHooks(hooks) {
   return [async (...args) => {
     const done = args[args.length - 1];
     const passedArgs = args.splice(0, args.length - 1);
-    for (const hook of hooks) {
+    await promiseSequence(hooks, async (hook) => {
       await pify(hook)(...passedArgs);
-    }
+    })();
     done();
   }];
 }
