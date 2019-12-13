@@ -1,3 +1,3 @@
-import opn from 'opn';
+import open from 'open';
 
-export default async (filePath) => opn(filePath, { wait: false });
+export default async (filePath) => open(filePath, { wait: false });
