@@ -1,3 +1,9 @@
+### [5.4.0](https://github.com/LanetheGreat/electron-forge/releases/tag/v5.4.0) (2019-12-13)
+
+##### Refactors
+
+* **generic:**  updated packages to latest major versions, fixed new linting errors. ([f2c95401](https://github.com/LanetheGreat/electron-forge/commit/f2c95401))
+
 #### [5.3.2](https://github.com/LanetheGreat/electron-forge/releases/tag/v5.3.2) (2019-12-11)
 
 ##### Chores
